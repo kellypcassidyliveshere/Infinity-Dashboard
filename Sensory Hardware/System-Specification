@@ -43,3 +43,16 @@ Signal Integrity: Maintaining encrypted, low-latency Bluetooth connectivity desp
 Primary Controller (Input Module): Captures high-fidelity spatial and force data from the actor's input device.
 Secondary Actuator (Output Module): A closed-loop, linear actuation system that maps primary input data to real-time physical displacement.
 Latency Specification: System maintains a < 50ms propagation delay for synchronized motion-mapping between the Primary Controller and Secondary Actuator.
+
+6. Interactive Mechanical Stimulation System
+
+6.1 System Architecture: Primary/Secondary Controller Relationship
+The system utilizes a Primary/Secondary motion-mapping architecture to ensure precise, real-time synchronization between the actor and the end-user.
+Primary Controller (Input Module): This device functions as the spatial-data acquisition node. It captures high-fidelity telemetry, including thrust depth, velocity, and force applied by the operator.
+Secondary Actuator (Output Module): This device functions as the mechanical execution node. It interprets the real-time telemetry from the Primary Controller and performs corresponding physical displacement.
+
+6.2 Component Specification
+Haptic Input Controller (Primary): An ergonomic interface equipped with 6-axis IMU (Inertial Measurement Unit) sensors and force-load cells to translate human input into digital motion vectors.
+Closed-Loop Linear Actuator (Secondary): The core mechanism of the member device. It utilizes a precision linear motor paired with an integrated position encoder.
+Closed-Loop Functionality: The encoder provides constant position feedback to the controller, ensuring the actuator’s physical state matches the Primary Controller's input state with sub-millisecond precision.
+Motion Profiling: The system supports programmable motion profiles (e.g., rhythmic thrusting, pressure modulation) processed via an embedded microcontroller (MCU) optimized for low-latency signal handling.
