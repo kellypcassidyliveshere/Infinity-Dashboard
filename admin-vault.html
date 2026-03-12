@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Infinity Link | Admin Vault</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root { --stone: #4A4E51; --gold: #d4af37; --black: #000000; --blue: #B0C4DE; }
+        body { background: var(--black); color: white; font-family: sans-serif; padding: 20px; }
+        h1 { color: var(--gold); border-bottom: 2px solid var(--stone); padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th { text-align: left; color: var(--blue); border-bottom: 1px solid var(--stone); padding: 10px; }
+        td { padding: 12px; border-bottom: 1px solid #222; font-size: 0.9rem; }
+        .file-link { color: var(--gold); text-decoration: none; font-weight: bold; }
+        .back-btn { display: inline-block; margin-top: 20px; color: var(--blue); text-decoration: none; border: 1px solid var(--blue); padding: 8px 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>📂 Submission Vault</h1>
+    <p>Reviewing Member Certifications</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Program/File Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in files %}
+            <tr>
+                <td>{{ file }}</td>
+                <td><a href="/uploads/{{ file }}" class="file-link" target="_blank">View</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/" class="back-btn">← Back to Dashboard</a>
+</body>
+</html>

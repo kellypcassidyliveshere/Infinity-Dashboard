@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberpunk System Dashboard</title>
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-pink: #ff00ff;
+            --bg-dark: #0a0a0f;
+        }
+
+        body { 
+            background: var(--bg-dark); 
+            color: var(--neon-blue); 
+            font-family: 'Courier New', monospace; 
+            margin: 0; padding: 20px;
+        }
+
+        /* Profile Header */
+        .profile-header { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-bottom: 25px; }
+        
+        .upload-container { 
+            width: 120px; height: 120px; border-radius: 50%; border: 3px solid var(--neon-pink); 
+            background: #222; display: flex; align-items: center; justify-content: center; 
+            cursor: pointer; overflow: hidden; position: relative;
+        }
+        
+        #profile-pic { width: 100%; height: 100%; object-fit: cover; }
+
+        .username-input { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--neon-blue); color: white; text-align: center; margin-bottom: 10px; }
+        .save-btn { width: 100%; padding: 10px; background: var(--neon-pink); border: none; color: white; font-weight: bold; cursor: pointer; }
+
+        /* Loyalty Card */
+        .loyalty-card { border: 1px solid var(--neon-blue); padding: 15px; margin-bottom: 25px; text-align: center; }
+
+        /* Roadmap Grid */
+        .milestone-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .circle { 
+            width: 100%; aspect-ratio: 1 / 1; border: 2px solid var(--neon-blue); 
+            border-radius: 50%; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; font-size: 0.7em; text-align: center; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="profile-header">
+        <label class="upload-container" for="file-upload">
+            <img id="profile-pic" src="https://via.placeholder.com/150" alt="Profile">
+        </label>
+        <input type="file" id="file-upload" style="display:none" accept="image/*" onchange="previewImage(event)">
+        
+        <input type="text" class="username-input" value="Kelly Yo">
+        <button class="save-btn">SAVE PROFILE</button>
+    </div>
+
+    <div class="loyalty-card">
+        <h3>CREDITS & LOYALTY</h3>
+        <div style="font-size: 1.5em; margin: 10px 0;">9,500 Credits</div>
+        <div style="display:flex; justify-content: space-around; font-size: 0.8em;">
+            <span>Gifts: 3</span>
+            <span>Rank: Mentor</span>
+        </div>
+    </div>
+
+    <div class="milestone-grid">
+        <div class="circle"><strong>1. MEMBER</strong><br>50% Prog</div>
+        <div class="circle"><strong>2. GUIDE</strong><br>60% Grad</div>
+        <div class="circle"><strong>3. ADMIN</strong><br>30% Proc</div>
+        <div class="circle"><strong>4. MENTOR</strong><br>Training</div>
+        <div class="circle"><strong>5. BOARD</strong><br>10% Inv</div>
+        <div class="circle" style="border-color: var(--neon-pink)"><strong>6. PARTNER</strong><br>💎</div>
+    </div>
+
+    <script>
+        // Function to preview selected image
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const output = document.getElementById('profile-pic');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity Link - Signature Drinks</title>
+    <style>
+        :root {
+            --black: #000000;
+            --neon-pink: #ff00ff;
+            --neon-green: #39ff14;
+            --neon-yellow: #ffff00;
+            --neon-cyan: #00e5ff;
+            --gold: #ffcc00;
+        }
+
+        body {
+            background-color: var(--black);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Prevent body scroll, use inner scroll */
+        }
+
+        header {
+            text-align: center;
+            padding: 15px 0;
+            background: linear-gradient(to bottom, #111, transparent);
+        }
+
+        header h1 {
+            color: var(--neon-pink);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.3rem;
+            margin: 0;
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* --- Horizontal Swipe Container --- */
+        .swipe-area {
+            flex: 1; /* Fills remaining space */
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 10px 10px 220px; /* Large bottom padding for footer room */
+            gap: 15px;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+            align-items: center; /* Vertically center cards */
+        }
+
+        .card-wrapper {
+            flex: 0 0 85%; /* Shows most of one card and a peek of the next */
+            scroll-snap-align: center; /* Snaps card to center */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .drink-container {
+            width: 100%;
+            border: 2px solid;
+            border-radius: 25px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            text-align: center;
+            box-sizing: border-box; /* Crucial for padding/border logic */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Tighter centering around the bottle */
+        .drink-container img {
+            max-height: 220px; /* Adjust based on screen size */
+            width: auto;
+            margin: 0 auto 10px;
+            display: block;
+        }
+
+        .drink-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 5px 0;
+            text-transform: uppercase;
+        }
+
+        .drink-desc {
+            font-size: 0.8rem;
+            color: #ccc;
+            line-height: 1.3;
+            min-height: 38px; /* Consistent height for descriptions */
+        }
+
+        .benefit-tag {
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--neon-cyan);
+            margin-top: 5px;
+        }
+
+        .profit-disclaimer {
+            font-size: 0.65rem;
+            color: #666;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* --- Floating Fixed Bottom UI --- */
+        .fixed-bottom {
+            position: fixed;
+            bottom: 20px; /* Raised for navigation bar clearance */
+            left: 0;
+            width: 100%;
+            z-index: 100; /* Ensure it stays on top */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Rounded and tight Redeem wrapper */
+        .redeem-wrap {
+            width: 90%;
+            max-width: 350px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 8px;
+            border-radius: 20px; /* Fully rounded outer corners */
+            margin-bottom: 10px;
+            border: 1px solid var(--gold); /* Integrated gold border */
+            text-align: center;
+        }
+
+        .redeem-label {
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .input-box {
+            display: flex;
+            border: 1px solid var(--gold);
+            border-radius: 12px; /* Rounded inner input box */
+            overflow: hidden; /* Keeps input/button inside the curve */
+            height: 35px;
+        }
+
+        .input-box input {
+            flex: 2;
+            background: #111;
+            border: none;
+            color: white;
+            padding: 0 10px;
+            font-size: 0.8rem;
+        }
+
+        .input-box button {
+            flex: 1;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            font-weight: bold;
+            font-size: 0.75rem;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* Sticky Footer with total and button */
+        .sticky-footer {
+            width: 90%;
+            max-width: 350px;
+            background: var(--black);
+            border: 2px solid var(--neon-pink);
+            border-radius: 50px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.4);
+        }
+
+        .total-price {
+            color: var(--neon-yellow);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .order-btn {
+            background: var(--neon-pink);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px var(--neon-pink);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CYBER LOUNGE</h1>
+    </header>
+
+    <div class="swipe-area">
+        
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: #00f2ff; box-shadow: 0 0 15px #00f2ff;">
+                <img src="mymooloo.png" alt="Kaleb Moon">
+                <div class="drink-name" style="color: #00f2ff; text-shadow: 0 0 10px #00f2ff;">Kaleb Moon</div>
+                <div class="drink-desc">Electric Blue Spirulina & Lychee Fizz<br>Marine Collagen + Zinc + Popping Pearls</div>
+                <div class="benefit-tag" style="color: #ff00ff;">Elasticity • Clarity • Vitality</div>
+            </div>
+            <div class="profit-disclaimer">Dedicated to the Next Generation</div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: var(--gold); box-shadow: 0 0 15px var(--gold);">
+                <img src="maiagold1.png" alt="Maia Gold">
+                <div class="drink-name" style="color: var(--gold); text-shadow: 0 0 10px var(--gold);">Maia Gold</div>
+                <div class="drink-desc">Smooth Golden Turmeric Base<br>Pineapple Chunks • Mango Slices • Peppercorns</div>
+                <div class="benefit-tag">Golden Vitality & Heart</div>
+            </div>
+            <div class="profit-disclaimer">Profits fund The Foundation Project</div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green);">
+                <img src="neon-green.jpg" alt="Neon Green">
+                <div class="drink-name" style="color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green);">Neon Green</div>
+                <div class="drink-desc">Granny Smith & Celery<br>Jalapeño (Tiny Hint)</div>
+                <div class="benefit-tag" style="color: #ff00ff;">Metabolism Kick</div>
+            </div>
+            <div class="profit-disclaimer">Profits fund The Foundation Project</div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: var(--neon-yellow); box-shadow: 0 0 15px var(--neon-yellow);">
+                <img src="electricyuzu.png" alt="Electric Yuzu">
+                <div class="drink-name" style="color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow);">Electric Yuzu</div>
+                <div class="drink-desc">Yuzu & Ginger Blend<br>Electrolytes + Clean Energy</div>
+                <div class="benefit-tag">Focus & Recovery</div>
+            </div>
+            <div class="profit-disclaimer">Profits fund The Foundation Project</div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: #E0115F; box-shadow: 0 0 15px #E0115F;">
+                <img src="rubyrush.png" alt="Ruby Rush">
+                <div class="drink-name" style="color: #E0115F; text-shadow: 0 0 10px #E0115F;">Ruby Rush</div>
+                <div class="drink-desc">Blood Orange & Ginseng<br>Antioxidant Boost</div>
+                <div class="benefit-tag">Immune Support</div>
+            </div>
+            <div class="profit-disclaimer">Profits fund The Foundation Project</div>
+        </div>
+
+        <div class="card-wrapper">
+            <div class="drink-container" style="border-color: #9400D3; box-shadow: 0 0 15px #9400D3;">
+                <img src="purplerain.png" alt="Purple Rain">
+                <div class="drink-name" style="color: #9400D3; text-shadow: 0 0 10px #9400D3;">Purple Rain</div>
+                <div class="drink-desc">Acai, Pomegranate & Fig<br>Polyphenol Rich</div>
+                <div class="benefit-tag">Brain Health</div>
+            </div>
+            <div class="profit-disclaimer">Profits fund The Foundation Project</div>
+        </div>
+
+
+    <div class="fixed-bottom">
+        
+        <div class="redeem-wrap">
+            <span class="redeem-label">HAVE A QR OR BOOKING CODE?</span>
+            <div class="input-box">
+                <input type="text" placeholder="Enter Code...">
+                <button>REDEEM</button>
+            </div>
+        </div>
+
+        <div class="sticky-footer">
+            <div class="total-price">$12.00</div>
+            <button class="order-btn">Order Now</button>
+        </div>
+    </div>
+
+</body>
+</html>

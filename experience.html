@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Infinity Link | Sensory Portal</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --accent-blue: #0096ff;
+            --accent-green: #00ffaa;
+            --text-gray: #d1d1d1;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-gray);
+            font-family: 'Segoe UI', Helvetica, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid #1a1a1a;
+            overflow: hidden;
+        }
+
+        .title-group {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        h2 { color: var(--accent-blue); font-weight: 300; letter-spacing: 2px; margin: 0; }
+        p { font-size: 0.85rem; opacity: 0.7; margin-top: 5px; }
+
+        /* Module 1: Horizon */
+        #horizon-container { width: 100%; height: 150px; position: relative; }
+        .horizon-glow {
+            width: 60px; height: 60px;
+            background: radial-gradient(circle, rgba(100, 200, 255, 0.9) 0%, transparent 70%);
+            position: absolute; border-radius: 50%;
+            animation: moveSideToSide 5s ease-in-out infinite;
+        }
+        @keyframes moveSideToSide { 0%, 100% { left: 10%; } 50% { left: 80%; } }
+
+        /* Module 2: Sand */
+        #sandCanvas {
+            border: 1px solid #222; background: #000;
+            touch-action: none; width: 85%; height: 300px; border-radius: 15px;
+        }
+
+        /* Module 3: Bio-Loom (Breathing) */
+        #loom-circle {
+            width: 100px; height: 100px;
+            border: 2px solid var(--accent-green);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 4s ease-in-out;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
+        }
+        .breathing { animation: breathe 8s ease-in-out infinite; }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(0, 255, 170, 0.2); }
+            50% { transform: scale(2.5); box-shadow: 0 0 50px rgba(0, 255, 170, 0.6); }
+        }
+
+        /* Module 4: Zen Gravity */
+        #gravityCanvas { width: 100%; height: 100%; position: absolute; top: 0; left: 0; pointer-events: none; }
+
+        button {
+            background: transparent; border: 1px solid var(--accent-blue);
+            color: var(--accent-blue); padding: 10px 25px;
+            border-radius: 20px; margin-top: 20px; z-index: 10;
+        }
+
+        .scroll-hint { font-size: 0.7rem; opacity: 0.4; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <section>
+        <div class="title-group">
+            <h2>Binaural Horizon</h2>
+            <p>Left/Right Stabilization (Use Headphones)</p>
+        </div>
+        <div id="horizon-container"><div class="horizon-glow" id="lightOrb"></div></div>
+        <button id="startBinaural">Activate Audio</button>
+        <div class="scroll-hint">Scroll for Kinetic Sand ↓</div>
+    </section>
+
+    <section>
+        <div class="title-group">
+            <h2>Kinetic Sand</h2>
+            <p>Tactile Haptic Grounding (Android Only)</p>
+        </div>
+        <canvas id="sandCanvas"></canvas>
+        <p style="font-size: 0.7rem; margin-top: 10px;">Double-tap to clear</p>
+        <div class="scroll-hint">Scroll for Bio-Loom ↓</div>
+    </section>
+
+    <section>
+        <div class="title-group">
+            <h2>Bio-Loom</h2>
+            <p>Sync your breath: Inhale as it expands, Exhale as it shrinks</p>
+        </div>
+        <div id="loom-circle" class="breathing"><span id="breatheText" style="color:var(--accent-green); font-size: 0.7rem;">READY</span></div>
+        <div class="scroll-hint">Scroll for Zen Focus ↓</div>
+    </section>
+
+    <section id="zen-section">
+        <canvas id="gravityCanvas"></canvas>
+        <div class="title-group">
+            <h2>Zen Focus</h2>
+            <p>Tilt your phone or drag to move light particles</p>
+        </div>
+        <div style="z-index: 10; opacity: 0.5; font-size: 0.8rem;">Infinity Link Project</div>
+    </section>
+
+    <script>
+        // --- 1. BINAURAL AUDIO ---
+        const startBtn = document.getElementById('startBinaural');
+        const lightOrb = document.getElementById('lightOrb');
+        let audioCtx, panner, oscillator, isBinaural = false;
+
+        startBtn.addEventListener('click', () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                oscillator = audioCtx.createOscillator();
+                panner = audioCtx.createStereoPanner();
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(110, audioCtx.currentTime); 
+                oscillator.connect(panner).connect(audioCtx.destination);
+                oscillator.start();
+            }
+            if (!isBinaural) { audioCtx.resume(); isBinaural = true; startBtn.innerText = "Active"; updatePanner(); }
+            else { audioCtx.suspend(); isBinaural = false; startBtn.innerText = "Paused"; }
+        });
+
+        function updatePanner() {
+            if (!isBinaural) return;
+            const panValue = (lightOrb.getBoundingClientRect().left / window.innerWidth - 0.5) * 2;
+            panner.pan.setValueAtTime(Math.max(-1, Math.min(1, panValue)), audioCtx.currentTime);
+            requestAnimationFrame(updatePanner);
+        }
+
+        // --- 2. KINETIC SAND & HAPTICS ---
+        const sCanvas = document.getElementById('sandCanvas');
+        const sCtx = sCanvas.getContext('2d');
+        sCanvas.width = sCanvas.offsetWidth; sCanvas.height = sCanvas.offsetHeight;
+
+        sCanvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = sCanvas.getBoundingClientRect();
+            const x = e.touches[0].clientX - rect.left;
+            const y = e.touches[0].clientY - rect.top;
+            sCtx.fillStyle = `rgba(0, 150, 255, ${Math.random()})`;
+            sCtx.beginPath(); sCtx.arc(x, y, 3, 0, Math.PI * 2); sCtx.fill();
+            if ("vibrate" in navigator) navigator.vibrate(15);
+        }, { passive: false });
+
+        sCanvas.addEventListener('dblclick', () => sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height));
+
+        // --- 3. BIO-LOOM TEXT ---
+        const bText = document.getElementById('breatheText');
+        setInterval(() => {
+            const circle = document.getElementById('loom-circle');
+            const size = circle.getBoundingClientRect().width;
+            bText.innerText = size > 150 ? "EXHALE" : "INHALE";
+        }, 100);
+
+        // --- 4. ZEN FOCUS PARTICLES ---
+        const zCanvas = document.getElementById('gravityCanvas');
+        const zCtx = zCanvas.getContext('2d');
+        zCanvas.width = window.innerWidth; zCanvas.height = window.innerHeight;
+        let particles = [];
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * zCanvas.width;
+                this.y = Math.random() * zCanvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY;
+                if (this.x < 0 || this.x > zCanvas.width || this.y < 0 || this.y > zCanvas.height) this.reset();
+            }
+            draw() {
+                zCtx.fillStyle = 'rgba(0, 150, 255, 0.5)';
+                zCtx.beginPath(); zCtx.arc(this.x, this.y, this.size, 0, Math.PI*2); zCtx.fill();
+            }
+        }
+
+        for(let i=0; i<50; i++) particles.push(new Particle());
+        function animateZen() {
+            zCtx.clearRect(0, 0, zCanvas.width, zCanvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateZen);
+        }
+        animateZen();
+    </script>
+</body>
+</html>

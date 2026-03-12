@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Link | Book A Pod</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --silver: #C0C0C0;
+            --black: #0a0a0a;
+            --neon-blue: #00d4ff;
+            --dark-gray: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--silver);
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            border: 1px solid var(--silver);
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #1a1a1a, #000);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        h1, h2 {
+            color: var(--gold);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .price-highlight {
+            color: var(--neon-blue);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .promo-box {
+            border: 1px dashed var(--gold);
+            padding: 15px;
+            margin: 20px 0;
+            background: rgba(212, 175, 55, 0.05);
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gold);
+        }
+
+        input, select {
+            width: 30%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid var(--silver);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .btn {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background: var(--silver);
+        }
+
+        #payment-section, #qr-section, #payid-section {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--silver);
+        }
+
+        .copy-box {
+            background: #333;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--neon-blue);
+        }
+
+        .qr-mock {
+            width: 150px;
+            height: 150px;
+            background: white;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CYBER LOUNGE</h1>
+    
+    <div class="promo-box">
+        <p>🚶 <strong>Walk-ins:</strong> <span class="price-highlight">$10/hr</span></p>
+        <p>✨ <strong>Book Online:</strong> <span class="price-highlight">$7/hr</span></p>
+        <p>🚀 <strong>Combo (3+ hrs):</strong> <span class="price-highlight">$5/hr</span></p>
+        <p>🎁 <em>Infinity Private - New Members: 50% off Virtual Gifts OR 33% off 1st Room Booking!</em></p>
+    </div>
+
+    <form id="bookingForm">
+        <div class="form-group">
+            <label>Hours to Book</label>
+            <input type="number" id="hours" min="1" value="1" oninput="calculateTotal()">
+        </div>
+        
+        <div class="form-group">
+            <p>Total Cost: <span id="totalDisplay" class="price-highlight">$7.00</span></p>
+            <p style="color: var(--neon-blue); font-size: 0.8em;">+ 30% OFF your first drink order included!</p>
+        </div>
+
+        <button type="button" class="btn" onclick="showPaymentOptions()">Proceed to Payment</button>
+    </form>
+
+    <div id="payment-section">
+        <h2>Select Payment Method</h2>
+        <button class="btn" style="background: #333; color: white; border: 1px solid var(--silver);" onclick="togglePayment('card')">Credit Card (Mock)</button>
+        <button class="btn" style="background: #333; color: white; border: 1px solid var(--silver);" onclick="togglePayment('payid')">PayID / Bank Transfer</button>
+    </div>
+
+    <div id="card-form" style="display:none; margin-top:15px;">
+        <input type="text" placeholder="Card Number" style="margin-bottom:10px;">
+        <div style="display:flex; gap:10px;">
+            <input type="text" placeholder="MM/YY">
+            <input type="text" placeholder="CVC">
+        </div>
+        <button class="btn" onclick="generateQR()">Submit Payment</button>
+    </div>
+
+    <div id="payid-section">
+        <p>Send payment to our PayID:</p>
+        <div class="copy-box">
+            <span id="payid-num">payments@thefoundationproject.online</span>
+            <button onclick="copyPayID()" style="background:var(--neon-blue); border:none; border-radius:3px; cursor:pointer;">Copy</button>
+        </div>
+        <p style="font-size: 0.8em; margin-top:10px;">Upload a screenshot of your receipt:</p>
+        <input type="file" accept="image/*">
+        <button class="btn" onclick="generateQR()">Confirm Upload</button>
+    </div>
+
+   <div id="qr-section" style="display:none; text-align:center;">
+    <h2 style="color: var(--gold);">Payment Successful!</h2>
+    <p style="color: var(--silver);">Your Infinity Pass is active.</p>
+    
+    <div style="background: white; padding: 15px; display: inline-block; border-radius: 10px; margin: 10px 0;">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=INFINITY-LINK-MEMBER-5592" alt="Booking QR">
+    </div>
+
+    <div style="border: 2px solid var(--neon-blue); padding: 15px; border-radius: 10px; background: rgba(0, 212, 255, 0.1);">
+        <h3 style="color: var(--neon-blue); margin-top: 0;">🎁 Active Rewards</h3>
+        <ul style="text-align: left; color: white; list-style: none; padding: 0;">
+            <li>✅ <strong>30% OFF</strong> First Drink (Juice Bar)</li>
+            <li>✅ <strong>50% OFF</strong> Virtual Gifts (Sensory App)</li>
+            <li>✅ <strong>33% OFF</strong> Your Next Room Booking</li>
+        </ul>
+        <small style="color: var(--silver);">Ref ID: IL-BAP-2026-CONF</small>
+    </div>
+    
+    <button class="btn" onclick="window.print()" style="margin-top: 15px; background: var(--silver);">Save as PDF / Screenshot</button>
+</div>
+
+<script>
+    function calculateTotal() {
+        const hours = document.getElementById('hours').value;
+        const rate = (hours >= 3) ? 5 : 7;
+        const total = hours * rate;
+        document.getElementById('totalDisplay').innerText = "$" + total.toFixed(2);
+    }
+
+    function showPaymentOptions() {
+        document.getElementById('bookingForm').style.display = 'none';
+        document.getElementById('payment-section').style.display = 'block';
+    }
+
+    function togglePayment(type) {
+        document.getElementById('card-form').style.display = (type === 'card') ? 'block' : 'none';
+        document.getElementById('payid-section').style.display = (type === 'payid') ? 'block' : 'none';
+    }
+
+    function copyPayID() {
+        const text = document.getElementById('payid-num').innerText;
+        navigator.clipboard.writeText(text);
+        alert("PayID copied! Paste this into your banking app.");
+    }
+
+    // This simulates the "Processing" delay for realism
+    function generateQR() {
+        const btn = event.target;
+        btn.innerText = "Processing Transaction...";
+        btn.disabled = true;
+
+        setTimeout(() => {
+            document.getElementById('payment-section').style.display = 'none';
+            document.getElementById('card-form').style.display = 'none';
+            document.getElementById('payid-section').style.display = 'none';
+            document.getElementById('qr-section').style.display = 'block';
+            
+            // Log for your records (In a real app, this would hit your database)
+            console.log("Payment Confirmed: Generating Member Rewards...");
+        }, 2000); // 2 second mock delay
+    }
+
+</body>
+</html>
