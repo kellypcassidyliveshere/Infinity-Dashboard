@@ -1,1 +1,19 @@
-
+Technical Requirements: Sensory Hardware Interaction
+​1. Overview
+​The system enables haptic feedback interactions between a Performer's vest and a Member's vest, mediated via a mobile application, to ensure secure, authorized, and real-time social-haptic experiences.
+​2. Revised Connection Flow
+​The architecture relies on an App-to-Cloud-to-Vest handshake to maintain security and low latency.
+​Discovery (The "Handshake"): Performer's vest/app broadcasts availability via BLE (Bluetooth Low Energy) Advertising. Member's app detects the signal and prompts: "Connect with Performer A?"
+​Authorization (The Acceptance): Upon Member's acceptance, the app sends a secure token to the backend server. The server establishes an active session state between both devices.
+​Confirmation (The Signal): Upon successful server verification, the system triggers an audio "connection made" signal to both parties.
+​The Trigger (The Physical Interaction): Once confirmed, the Performer interacts with their vest. The Performer's app instantly sends an encrypted packet to the backend, which routes it to the Member's vest to trigger the haptic event.
+​3. Hardware/Firmware Requirements
+​Controller: Low-power Bluetooth SoC (e.g., nRF52/nRF54 series) to manage BLE advertising and hardware logic.
+​Actuators: Linear Resonant Actuators (LRAs) for high-fidelity haptic feedback.
+​Latency Target: Interaction latency must remain < 100\text{ms} for "real-time" perception.
+​Security: All commands between the vest and the phone must be encrypted to prevent spoofing or unauthorized triggers.
+​4. Proposed Repository Structure
+​/Hardware-Schematics: KiCad/EasyEDA source files.
+​/Firmware: C/C++ source code for the vests.
+​/API-Specs: Documentation for how the App communicates with the Render backend.
+​/System-Specification.md: This document.
