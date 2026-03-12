@@ -17,3 +17,17 @@ Technical Requirements: Sensory Hardware Interaction
 ​/Firmware: C/C++ source code for the vests.
 ​/API-Specs: Documentation for how the App communicates with the Render backend.
 ​/System-Specification.md: This document.
+
+5. Phase 2: Mechanical Integration & Actuation
+The secondary phase of the project transitions from purely tactile haptic feedback (vibration) to synchronized mechanical actuation (in-and-out motion) for internal wearable devices.
+5.1 System Objective
+To establish a low-latency "Master-Slave" link between the Actor’s input device and the Member’s integrated mechanical actuator. The Member’s device must replicate the rhythmic movement of the Actor’s device in real-time.
+5.2 Mechanical Requirements
+Actuation Mechanism: High-torque linear actuators or micro-servo arrays capable of providing smooth, repetitive mechanical motion.
+Latency Synchronization: To ensure natural physical sensation, the motion-control loop must maintain a latency of < 50\text{ms}.
+Hardware Safety: All mechanical components must be housed in medical-grade, hypoallergenic, and water-resistant materials. Heat dissipation must be managed to ensure the device remains safe for internal use during prolonged sessions.
+Closed-Loop Feedback: The actuator must report its position back to the system to ensure the mechanical motion stays in sync with the Actor’s input.
+5.3 Technical Challenges
+Power Management: High-current demand for mechanical movement requires high-density, slim-profile battery solutions.
+Wearability: Balancing the weight of the motor/actuator with the flexibility required for a comfortable, snug-fitting bodysuit.
+Signal Integrity: Maintaining encrypted, low-latency Bluetooth connectivity despite potential signal interference from the human body.
