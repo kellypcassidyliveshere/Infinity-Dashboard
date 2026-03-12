@@ -1,17 +1,21 @@
-Technical Requirements: Sensory Hardware Interaction
+Technical Requirements: Sensory Hardware Interaction Haptic Bodysuit
+
 ​1. Overview
 ​The system enables haptic feedback interactions between a Performer's vest and a Member's vest, mediated via a mobile application, to ensure secure, authorized, and real-time social-haptic experiences.
+
 ​2. Revised Connection Flow
 ​The architecture relies on an App-to-Cloud-to-Vest handshake to maintain security and low latency.
 ​Discovery (The "Handshake"): Performer's vest/app broadcasts availability via BLE (Bluetooth Low Energy) Advertising. Member's app detects the signal and prompts: "Connect with Performer A?"
 ​Authorization (The Acceptance): Upon Member's acceptance, the app sends a secure token to the backend server. The server establishes an active session state between both devices.
 ​Confirmation (The Signal): Upon successful server verification, the system triggers an audio "connection made" signal to both parties.
 ​The Trigger (The Physical Interaction): Once confirmed, the Performer interacts with their vest. The Performer's app instantly sends an encrypted packet to the backend, which routes it to the Member's vest to trigger the haptic event.
+
 ​3. Hardware/Firmware Requirements
 ​Controller: Low-power Bluetooth SoC (e.g., nRF52/nRF54 series) to manage BLE advertising and hardware logic.
 ​Actuators: Linear Resonant Actuators (LRAs) for high-fidelity haptic feedback.
 ​Latency Target: Interaction latency must remain < 100\text{ms} for "real-time" perception.
 ​Security: All commands between the vest and the phone must be encrypted to prevent spoofing or unauthorized triggers.
+
 ​4. Proposed Repository Structure
 ​/Hardware-Schematics: KiCad/EasyEDA source files.
 ​/Firmware: C/C++ source code for the vests.
@@ -20,14 +24,22 @@ Technical Requirements: Sensory Hardware Interaction
 
 5. Phase 2: Mechanical Integration & Actuation
 The secondary phase of the project transitions from purely tactile haptic feedback (vibration) to synchronized mechanical actuation (in-and-out motion) for internal wearable devices.
+
 5.1 System Objective
 To establish a low-latency "Master-Slave" link between the Actor’s input device and the Member’s integrated mechanical actuator. The Member’s device must replicate the rhythmic movement of the Actor’s device in real-time.
+
 5.2 Mechanical Requirements
 Actuation Mechanism: High-torque linear actuators or micro-servo arrays capable of providing smooth, repetitive mechanical motion.
 Latency Synchronization: To ensure natural physical sensation, the motion-control loop must maintain a latency of < 50\text{ms}.
 Hardware Safety: All mechanical components must be housed in medical-grade, hypoallergenic, and water-resistant materials. Heat dissipation must be managed to ensure the device remains safe for internal use during prolonged sessions.
 Closed-Loop Feedback: The actuator must report its position back to the system to ensure the mechanical motion stays in sync with the Actor’s input.
+
 5.3 Technical Challenges
 Power Management: High-current demand for mechanical movement requires high-density, slim-profile battery solutions.
 Wearability: Balancing the weight of the motor/actuator with the flexibility required for a comfortable, snug-fitting bodysuit.
 Signal Integrity: Maintaining encrypted, low-latency Bluetooth connectivity despite potential signal interference from the human body.
+
+5.4 Synchronized Actuation Architecture
+Primary Controller (Input Module): Captures high-fidelity spatial and force data from the actor's input device.
+Secondary Actuator (Output Module): A closed-loop, linear actuation system that maps primary input data to real-time physical displacement.
+Latency Specification: System maintains a < 50ms propagation delay for synchronized motion-mapping between the Primary Controller and Secondary Actuator.
