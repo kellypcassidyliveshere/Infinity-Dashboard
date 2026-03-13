@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Technical Requirements: Sensory Hardware Interaction</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: 20px auto; color: #333; }
+        h1, h2, h3 { color: #2c3e50; }
+        code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; }
+        section { margin-bottom: 25px; }
+        .spec-table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        .spec-table th, .spec-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <h1>Technical Requirements: Sensory Hardware Interaction Haptic Bodysuit</h1>
+
+    <section>
+        <h2>1. Overview</h2>
+        <p>The system enables haptic feedback interactions between a Performer's vest and a Member's vest, mediated via a mobile application, to ensure secure, authorized, and real-time social-haptic experiences.</p>
+    </section>
+
+    <section>
+        <h2>2. Revised Connection Flow</h2>
+        <p>The architecture relies on an App-to-Cloud-to-Vest handshake to maintain security and low latency.</p>
+        <ul>
+            <li><strong>Discovery:</strong> Performer's vest/app broadcasts availability via BLE Advertising.</li>
+            <li><strong>Authorization:</strong> Upon Member's acceptance, the app sends a secure token to the backend server.</li>
+            <li><strong>Confirmation:</strong> Upon server verification, the system triggers an audio signal to both parties.</li>
+            <li><strong>The Trigger:</strong> Performer interacts with their vest; the app routes an encrypted packet to the Member's vest.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. Hardware/Firmware Requirements</h2>
+        <ul>
+            <li><strong>Controller:</strong> Low-power Bluetooth SoC (e.g., nRF52/nRF54 series).</li>
+            <li><strong>Actuators:</strong> Linear Resonant Actuators (LRAs) for high-fidelity haptic feedback.</li>
+            <li><strong>Latency Target:</strong> &lt; 100ms.</li>
+            <li><strong>Security:</strong> Encrypted command packets to prevent spoofing.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. System Component Categorization</h2>
+        <p><strong>Haptic Bodysuit:</strong> Sensory Immersion - Embedded Conductive Traces / LRAs</p>
+        <p><strong>Mechanical Stimulation:</strong> Physical Stimulation - Closed-Loop Linear Actuation</p>
+    </section>
+
+    <section>
+        <h2>5.1-5.4 Mechanical Integration & Actuation</h2>
+        <h3>Key Objectives</h3>
+        <ul>
+            <li><strong>Actuation:</strong> High-torque linear actuators or micro-servo arrays.</li>
+            <li><strong>Latency:</strong> &lt; 50ms propagation delay.</li>
+            <li><strong>Safety:</strong> Medical-grade, hypoallergenic, water-resistant materials with managed heat dissipation.</li>
+            <li><strong>Closed-Loop:</strong> Encoder-based position feedback to ensure input/output synchronization.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>6. Interactive Mechanical Stimulation System</h2>
+        <h3>6.1 Primary/Secondary Architecture</h3>
+        <p><strong>Primary Controller (Input):</strong> Captures spatial data, thrust depth, velocity, and force.</p>
+        <p><strong>Secondary Actuator (Output):</strong> Interprets telemetry and performs corresponding physical displacement.</p>
+    </section>
+
+</body>
+</html>
+
