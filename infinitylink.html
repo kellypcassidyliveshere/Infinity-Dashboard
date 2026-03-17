@@ -19,18 +19,20 @@
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
+            width: 100%;
+            max-width: 400px; /* Matches the grid width */
         }
 
         .logo-container img {
-            width: 200px; /* Adjust based on your image size */
+            width: 250px; /* Sized to look balanced */
+            height: auto;
         }
 
         .divider {
-            width: 80%;
-            height: 2px;
-            background-color: #444;
-            margin: 20px 0;
+            width: 100%; /* Spans the full 400px width */
+            height: 1px; /* Thinner line for a cleaner look */
+            background-color: #555;
+            margin: 25px auto; /* Centers the line with even spacing */
         }
 
         /* Grid Layout */
@@ -44,9 +46,9 @@
 
         /* Card Styling */
         .card {
-            background-color: #4A4E54; /* Dark grey cards */
-            border-radius: 20px;
-            padding: 25px 10px;
+            background-color: #3e4247; /* Slightly darker grey for depth */
+            border-radius: 25px;
+            padding: 30px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -61,7 +63,7 @@
         }
 
         .card i {
-            font-size: 40px;
+            font-size: 45px; /* Slightly larger icons */
             margin-bottom: 15px;
             color: #ADD8E6; /* Light blue icons */
         }
@@ -70,11 +72,6 @@
             font-weight: bold;
             font-size: 14px;
             text-align: center;
-        }
-
-        /* Full width for bottom profile button if desired */
-        .profile-card {
-            grid-column: span 1; 
         }
 
     </style>
@@ -115,7 +112,7 @@
             <span>Social Events</span>
         </a>
 
-        <a href="profile.html" class="card profile-card">
+        <a href="profile.html" class="card">
             <i class="fas fa-user"></i>
             <span>Member Profile</span>
         </a>
