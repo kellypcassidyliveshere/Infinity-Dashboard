@@ -3,116 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Link | Cyber Lounge & Juice Bar</title>
+    <title>Infinity Link | Hosted By Infinity Link</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --obsidian: #1a1a1a;
-            --gold: #d4af37;
-            --neon-green: #39ff14;
+            --obsidian: #080808;
+            --cyan: #00ffff;
             --violet: #8b00ff;
-            --white: #ffffff;
+            --magenta: #ff00ff;
+            --neon-white: #ffffff;
+            --cyan-glow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            --violet-glow: 0 0 10px #8b00ff, 0 0 20px #8b00ff;
         }
-        body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--obsidian); color: var(--white); overflow-x: hidden; }
         
-        /* HO-MIE STYLE TOP BAR */
-        .top-banner { background: var(--gold); color: black; text-align: center; padding: 10px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
+        body { margin: 0; font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--obsidian); color: var(--neon-white); overflow-x: hidden; }
 
-        /* HERO SECTION */
-        header { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('your-storefront-image.jpg'); background-size: cover; background-position: center; }
-        header h1 { font-size: 3rem; margin-bottom: 10px; letter-spacing: 4px; color: var(--gold); }
-        header p { font-size: 1.2rem; max-width: 600px; padding: 0 20px; }
+        /* NEON TOP BANNER */
+        .top-banner { 
+            background: rgba(139, 0, 255, 0.2); 
+            border-bottom: 2px solid var(--violet); 
+            box-shadow: var(--violet-glow);
+            color: var(--cyan); text-align: center; padding: 10px; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; 
+        }
 
-        /* IMPACT STRIP */
-        .impact-strip { display: flex; justify-content: space-around; background: #222; padding: 40px 10px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
-        .stat { text-align: center; }
-        .stat h2 { color: var(--gold); margin: 0; font-size: 2rem; }
-        .stat p { margin: 5px 0 0; font-size: 0.9rem; text-transform: uppercase; }
+        /* HERO - THE ENTRY PORTAL */
+        header { 
+            height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('your-party-image-27.jpg'); /* Use a variation of image_27.png here */
+            background-size: cover; background-position: center; border-bottom: 3px solid var(--cyan); box-shadow: var(--cyan-glow);
+        }
+        
+        header h1 { font-size: 4rem; margin-bottom: 0px; letter-spacing: 8px; color: var(--neon-white); text-shadow: var(--cyan-glow); }
+        header p { font-size: 1.4rem; max-width: 700px; padding: 0 20px; color: var(--magenta); text-transform: uppercase; letter-spacing: 2px;}
 
-        /* DRINK GRID (The Signature 14) */
-        .section-title { text-align: center; margin: 60px 0 30px; font-size: 2rem; color: var(--gold); text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 20px; }
-        .card { background: #2a2a2a; border-radius: 10px; overflow: hidden; transition: 0.3s; border: 1px solid transparent; }
-        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        /* THE SIGNATURE 14 (Neon Grid) */
+        .section-title { text-align: center; margin: 80px 0 40px; font-size: 2.5rem; color: var(--cyan); text-transform: uppercase; text-shadow: var(--cyan-glow); }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0 40px; }
+        
+        .card { 
+            background: rgba(26, 26, 26, 0.5); border-radius: 15px; overflow: hidden; transition: 0.3s; 
+            border: 2px solid var(--violet); box-shadow: 0 0 15px rgba(139, 0, 255, 0.3);
+        }
+        
+        .card:hover { border-color: var(--cyan); box-shadow: var(--cyan-glow); transform: scale(1.02); }
         .card img { width: 100%; height: 350px; object-fit: cover; }
-        .card-info { padding: 20px; text-align: center; }
-        .card-info h3 { margin: 0; color: var(--white); }
-        .card-info p { color: #aaa; font-size: 0.9rem; }
+        
+        .card-info { padding: 25px; text-align: center; }
+        .card-info h3 { margin: 0; color: var(--neon-white); text-shadow: var(--cyan-glow); }
+        .card-info p { color: var(--magenta); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* POD BOOKING FORM */
-        .booking-section { background: #111; padding: 60px 20px; margin-top: 60px; }
-        .booking-form { max-width: 500px; margin: 0 auto; background: #222; padding: 30px; border-radius: 15px; border-left: 5px solid var(--violet); }
-        .booking-form input, .booking-form select, .booking-form button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; font-size: 1rem; }
-        .booking-form button { background: var(--violet); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .booking-form button:hover { background: #6a00cc; }
+        /* BOOKING - NEON ISOLATION MODULE */
+        .booking-section { background: rgba(0,0,0,0.9); padding: 80px 20px; margin-top: 80px; border-top: 2px solid var(--cyan); }
+        
+        .booking-form { 
+            max-width: 500px; margin: 0 auto; background: rgba(17, 17, 17, 0.8); padding: 40px; border-radius: 20px; 
+            border: 2px solid var(--violet); box-shadow: var(--violet-glow);
+        }
+        
+        .booking-form input, .booking-form select, .booking-form button { 
+            width: 100%; padding: 15px; margin: 15px 0; border-radius: 8px; font-size: 1rem; 
+            background: #222; border: 1px solid var(--violet); color: var(--neon-white);
+        }
+        
+        .booking-form button { 
+            background: var(--violet); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; 
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        
+        .booking-form button:hover { background: var(--magenta); box-shadow: 0 0 15px var(--magenta); }
 
-        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #666; }
+        footer { 
+            padding: 60px; text-align: center; font-size: 0.9rem; color: var(--violet); 
+            border-top: 2px solid var(--violet);
+        }
+        footer p { margin: 5px 0; letter-spacing: 1px; }
+
+        /* Add a custom text cursor that glows */
+        * { cursor: url('cyan-glow-cursor.png'), auto; }
+
     </style>
 </head>
 <body>
 
-    <div class="top-banner">100% OF PROFITS SUPPORT THE FOUNDATION PROJECT MISSION</div>
+    <div class="top-banner">DATA STREAM ACTIVE: FOUNDATION PROJECT IS LIVE</div>
 
     <header>
         <h1>INFINITY LINK</h1>
-        <p>A High-Tech Safe Zone featuring the Vitality Press Juice Bar & Private Cyber Lounge.</p>
+        <p>A Social Ecosystem. A High-Tech Safe Zone.</p>
     </header>
 
-    <div class="impact-strip">
-        <div class="stat">
-            <h2>14</h2>
-            <p>Signature Nootropics</p>
-        </div>
-        <div class="stat">
-            <h2>$1.19M</h2>
-            <p>Projected Social Impact</p>
-        </div>
-        <div class="stat">
-            <h2>14</h2>
-            <p>Private Safe Pods</p>
-        </div>
-    </div>
-
     <section id="drinks">
-        <h2 class="section-title">The Signature 14</h2>
+        <h2 class="section-title">Nootropic Vitality Press</h2>
         <div class="grid">
             <div class="card">
-                <img src="kaleb-moon.png" alt="Kaleb Moon">
+                <img src="your-neongreen-juice.jpg" alt="Neon Green">
                 <div class="card-info">
-                    <h3>Kaleb Moon</h3>
-                    <p>Collagen & Zinc Vitality Press</p>
-                    <span style="color:var(--gold)">$12.50</span>
+                    <h3>NEON GREEN</h3>
+                    <p>Chlorophyll & Zinc Build</p>
+                    <span style="color:var(--cyan)">VITALITY ACCESS [ACTIVE]</span>
                 </div>
             </div>
             <div class="card">
-                <img src="cookies-and-code.png" alt="Cookies & Code">
+                <img src="your-ruby-rush.jpg" alt="Ruby Rush">
                 <div class="card-info">
-                    <h3>Cookies & Code</h3>
-                    <p>Obsidian Charcoal & Whey Protein</p>
-                    <span style="color:var(--gold)">$11.50</span>
+                    <h3>RUBY RUSH</h3>
+                    <p>Obsidian Charcoal Blend</p>
+                    <span style="color:var(--cyan)">SYSTEM RELOAD [ACTIVE]</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="booking" class="booking-section">
-        <h2 class="section-title">Book a Private Pod</h2>
+        <h2 class="section-title">Secure Your Pod</h2>
         <div class="booking-form">
-            <p style="text-align: center; color: var(--violet);">UPSTAIRS CYBER LOUNGE | $10/HR WALK-IN</p>
-            <input type="text" placeholder="Full Name" required>
-            <input type="email" placeholder="Email Address" required>
+            <p style="text-align: center; color: var(--cyan); text-shadow: var(--cyan-glow); letter-spacing: 2px;">POD STATUS: 14 [ONLINE] |Walk-In $10/HR</p>
+            <input type="text" placeholder="Identity Verification (Name)" required>
+            <input type="email" placeholder="Contact Protocol (Email)" required>
             <select>
-                <option>Select a Pod (1-14)</option>
-                <option>Pod 1 (Window View)</option>
+                <option>Access Level: Pod 1-14</option>
+                <option>Pod 1 (Front Entrance)</option>
                 <option>Pod 13 (High Privacy)</option>
             </select>
             <input type="datetime-local">
-            <button type="submit">RESERVE MY SAFE ZONE</button>
+            <button type="submit">ACTIVATE SAFE ZONE</button>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2026 INFINITY LINK | POWERING THE FOUNDATION PROJECT</p>
-<footer>
+        <p>POWERED BY: THE FOUNDATION PROJECT MISSION</p>
+        <p>PEER SUPPORT | NDIS ADVOCACY | SAFE HOUSING</p>
+        <p>&copy; 2026 INFINITY LINK | EST. Melbourne, VIC</p>
+    </footer>
+
 </body>
 </html>
