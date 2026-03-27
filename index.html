@@ -14,8 +14,8 @@
             --violet: #8b00ff;
             --magenta: #ff00ff;
             --neon-text: #fff;
-            --cyan-glow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
-            --violet-glow: 0 0 15px rgba(139, 0, 255, 0.8), 0 0 30px rgba(139, 0, 255, 0.5);
+            --cyan-glow: 0 0 10px rgba(0, 255, 255, 0.8);
+            --violet-glow: 0 0 15px rgba(139, 0, 255, 0.8);
         }
 
         body { 
@@ -26,194 +26,159 @@
             overflow-x: hidden; 
         }
 
-        /* NEON SYSTEM STRIP */
+        /* SYSTEM STATUS TOP BAR */
         .system-banner {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             color: var(--cyan);
             text-align: center;
             padding: 12px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             border-bottom: 2px solid var(--violet);
             box-shadow: var(--violet-glow);
-            animation: neonPulse 2s infinite alternate;
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        @keyframes neonPulse {
-            from { box-shadow: 0 0 10px var(--violet); }
-            to { box-shadow: 0 0 25px var(--magenta); border-color: var(--magenta); }
-        }
-
-        /* HERO SECTION */
         header {
-            height: 90vh;
+            height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)), url('your-party-visual.jpg');
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('your-party-visual.jpg');
             background-size: cover;
-            background-position: center;
         }
 
         .hero-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            letter-spacing: 12px;
-            margin-bottom: 10px;
-            color: var(--cyan);
+            font-size: 3rem;
+            letter-spacing: 10px;
+            color: var(--neon-text);
             text-shadow: var(--cyan-glow);
-            text-transform: uppercase;
         }
 
-        .hero-subtitle {
-            color: var(--magenta);
-            font-size: 1.1rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 300;
+        /* --- THE CAROUSEL ENGINE --- */
+        .carousel-section {
+            padding: 40px 0;
+            background: #000;
         }
 
-        /* CAROUSEL SECTION */
-        .carousel-section { padding: 80px 0; background: #000; }
         .section-header {
             text-align: center;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--cyan);
-            margin-bottom: 40px;
-            letter-spacing: 4px;
-            text-shadow: var(--cyan-glow);
+            margin-bottom: 30px;
+            letter-spacing: 5px;
         }
 
-        /* The Horizontal Scroll Wrapper */
-        .carousel-container {
+        /* This container enables the horizontal swipe */
+        .carousel-wrapper {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 20px 40px;
-            gap: 25px;
-            scrollbar-width: none; /* Hide for Firefox */
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory; /* Makes it "snap" to each card */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            padding: 20px 20px 40px 20px;
+            gap: 20px;
         }
 
-        .carousel-container::-webkit-scrollbar { display: none; /* Hide for Chrome/Safari */ }
+        /* Custom Scrollbar for the Carousel */
+        .carousel-wrapper::-webkit-scrollbar {
+            height: 4px;
+        }
+        .carousel-wrapper::-webkit-scrollbar-thumb {
+            background: var(--violet);
+            border-radius: 10px;
+            box-shadow: var(--violet-glow);
+        }
 
         .drink-card {
-            flex: 0 0 300px; /* Fixed width for items in carousel */
-            scroll-snap-align: start;
+            flex: 0 0 85%; /* Shows most of one card and a peek of the next */
+            max-width: 320px;
+            scroll-snap-align: center; /* Centers the card when you scroll */
             background: #111;
+            border: 1px solid var(--violet);
             border-radius: 15px;
-            border: 2px solid var(--violet);
-            box-shadow: 0 0 10px rgba(139, 0, 255, 0.2);
             overflow: hidden;
-            transition: 0.4s ease;
+            transition: transform 0.3s ease;
         }
 
-        .drink-card:hover {
-            border-color: var(--cyan);
-            box-shadow: var(--cyan-glow);
-            transform: scale(1.03);
-        }
-
-        .drink-card img { width: 100%; height: 320px; object-fit: cover; border-bottom: 1px solid var(--violet); }
-
-        .card-content { padding: 20px; text-align: center; }
-        .card-content h3 { font-family: 'Orbitron', sans-serif; color: var(--cyan); margin: 0; font-size: 1.2rem; }
-        .card-content p { color: var(--magenta); margin: 8px 0; font-size: 0.85rem; text-transform: uppercase; }
-        .status-tag { font-size: 0.75rem; color: var(--cyan); border: 1px solid var(--cyan); padding: 4px 8px; border-radius: 4px; display: inline-block; }
-
-        /* BOOKING WRAP */
-        .booking-wrap { padding: 80px 20px; display: flex; justify-content: center; }
-        .booking-form {
-            background: #0a0a0a;
-            padding: 40px;
-            border: 2px solid var(--violet);
-            box-shadow: var(--violet-glow);
+        .drink-card img {
             width: 100%;
-            max-width: 450px;
-            border-radius: 15px;
+            height: 300px;
+            object-fit: cover;
         }
 
-        .booking-form h2 { 
-            color: var(--cyan); 
-            text-shadow: var(--cyan-glow);
-            text-align: center; 
-            margin-bottom: 30px; 
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+        .card-content {
+            padding: 20px;
+            background: #0a0a0a;
+            border-top: 1px solid var(--violet);
         }
 
-        input, select {
+        .card-content h3 { font-family: 'Orbitron', sans-serif; color: var(--cyan); margin: 0; font-size: 1.1rem; }
+        .card-content p { color: var(--magenta); font-size: 0.8rem; margin: 10px 0; letter-spacing: 1px; }
+
+        /* --- BOOKING MODULE --- */
+        .booking-form {
+            margin: 40px 20px;
+            padding: 30px;
+            background: #000;
+            border: 2px solid var(--cyan);
+            box-shadow: var(--cyan-glow);
+            border-radius: 10px;
+        }
+
+        input, select, .btn-activate {
             width: 100%;
             padding: 15px;
-            margin-bottom: 15px;
-            background: #000;
+            margin: 10px 0;
+            background: #111;
             border: 1px solid var(--violet);
             color: #fff;
             font-family: 'Rajdhani', sans-serif;
-            border-radius: 8px;
             box-sizing: border-box;
         }
 
-        input:focus { border-color: var(--cyan); outline: none; box-shadow: 0 0 5px var(--cyan); }
-
         .btn-activate {
-            width: 100%;
-            padding: 18px;
             background: var(--violet);
-            color: #fff;
-            border: none;
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
             letter-spacing: 2px;
             cursor: pointer;
-            border-radius: 8px;
-            transition: 0.3s;
+            border: none;
         }
 
-        .btn-activate:hover {
-            background: var(--magenta);
-            box-shadow: 0 0 20px var(--magenta);
-        }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; }
 
-        footer {
-            padding: 60px 20px;
-            text-align: center;
-            border-top: 1px solid var(--violet);
-            background: #050505;
-        }
-
-        .footer-logo { font-family: 'Orbitron', sans-serif; color: var(--violet); font-size: 1.2rem; margin-bottom: 10px; }
-        .footer-sub { font-size: 0.8rem; color: #555; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <div class="system-banner">
-        DATA STREAM ACTIVE: FOUNDATION PROJECT IS LIVE
+        <i class="fas fa-link"></i> 100% PROFIT TO THE FOUNDATION PROJECT
     </div>
 
     <header>
         <h1 class="hero-title">INFINITY LINK</h1>
-        <p class="hero-subtitle">A Social Ecosystem. A High-Tech Safe Zone.</p>
+        <p style="color:var(--magenta); letter-spacing:3px;">VIRTUAL ACCESS HUB</p>
     </header>
 
     <section class="carousel-section">
-        <h2 class="section-header">NOOTROPIC VITALITY PRESS</h2>
-        <div class="carousel-container">
-            
+        <h2 class="section-header">VITALITY PRESS</h2>
+        
+        <div class="carousel-wrapper">
             <div class="drink-card">
                 <img src="neon-green.jpg" alt="Neon Green">
                 <div class="card-content">
                     <h3>NEON GREEN</h3>
-                    <p>Chlorophyll & Zinc Build</p>
-                    <span class="status-tag">VITALITY ACCESS [ACTIVE]</span>
+                    <p>ZINC & CHLOROPHYLL BUILD</p>
+                    <span style="color:var(--cyan); font-size:0.7rem;">[ STATUS: ONLINE ]</span>
                 </div>
             </div>
 
@@ -221,44 +186,49 @@
                 <img src="ruby-rush.jpg" alt="Ruby Rush">
                 <div class="card-content">
                     <h3>RUBY RUSH</h3>
-                    <p>Obsidian Charcoal Blend</p>
-                    <span class="status-tag">SYSTEM RELOAD [ACTIVE]</span>
+                    <p>OBSIDIAN CHARCOAL BLEND</p>
+                    <span style="color:var(--cyan); font-size:0.7rem;">[ STATUS: ONLINE ]</span>
                 </div>
             </div>
 
             <div class="drink-card">
-                <img src="blue-matcha.jpg" alt="Blue Matcha">
+                <img src="blue-bolt.jpg" alt="Blue Bolt">
                 <div class="card-content">
                     <h3>BLUE BOLT</h3>
-                    <p>E3 Live & Matcha Fuel</p>
-                    <span class="status-tag">FOCUS STREAM [PENDING]</span>
+                    <p>E3 LIVE & MATCHA FUEL</p>
+                    <span style="color:var(--magenta); font-size:0.7rem;">[ STATUS: PENDING ]</span>
                 </div>
             </div>
 
+            <div class="drink-card">
+                <div style="height:300px; display:flex; align-items:center; justify-content:center; color:#333;">
+                    <i class="fas fa-plus fa-3x"></i>
+                </div>
+                <div class="card-content">
+                    <h3>SYSTEM LOAD</h3>
+                    <p>ADD SIGNATURE DATA</p>
+                </div>
             </div>
-        <p style="text-align:center; color:#444; font-size:0.8rem; margin-top:20px;">[ SWIPE TO EXPLORE SYSTEM ]</p>
+        </div>
+        
+        <p style="text-align:center; color:var(--violet); font-size:0.7rem;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
     </section>
 
-    <section class="booking-wrap">
-        <div class="booking-form">
-            <h2>SECURE YOUR POD</h2>
-            <p style="text-align: center; color: var(--cyan); font-size: 0.8rem; margin-top: -20px; margin-bottom: 20px; letter-spacing: 1px;">POD STATUS: 14 [ONLINE] | $10/HR</p>
-            <input type="text" placeholder="Identity Verification (Name)">
-            <input type="email" placeholder="Contact Protocol (Email)">
-            <select>
-                <option>Access Level: Pod 01-14</option>
-                <option>Pod 01 - Front Deck</option>
-                <option>Pod 13 - Deep Privacy</option>
-            </select>
-            <input type="datetime-local">
-            <button class="btn-activate">ACTIVATE SAFE ZONE</button>
-        </div>
-    </section>
+    <div class="booking-form">
+        <h2 style="color:var(--cyan); text-align:center; font-family:'Orbitron';">SECURE SAFE POD</h2>
+        <input type="text" placeholder="NAME / IDENTITY">
+        <input type="email" placeholder="CONTACT PROTOCOL">
+        <select>
+            <option>SELECT POD (01-14)</option>
+            <option>POD 01 - FRONT DECK</option>
+            <option>POD 13 - HIGH PRIVACY</option>
+        </select>
+        <button class="btn-activate">ACTIVATE SAFE ZONE</button>
+    </div>
 
     <footer>
-        <div class="footer-logo">INFINITY LINK</div>
-        <div class="footer-sub">115 Union Rd, Ascot Vale, VIC</div>
-        <p style="color:var(--magenta); font-size:0.7rem; margin-top:20px;">POWERED BY THE FOUNDATION PROJECT</p>
+        <p>INFINITY LINK | THE FOUNDATION PROJECT</p>
+        <p>115 UNION RD, ASCOT VALE, VIC</p>
     </footer>
 
 </body>
