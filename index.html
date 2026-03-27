@@ -1,91 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Infinity Link | Members Lounge</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Link | Cyber Lounge & Juice Bar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            background: radial-gradient(circle, #2e2e2e, #000);
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        :root {
+            --obsidian: #1a1a1a;
+            --gold: #d4af37;
+            --neon-green: #39ff14;
+            --violet: #8b00ff;
+            --white: #ffffff;
         }
+        body { margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: var(--obsidian); color: var(--white); overflow-x: hidden; }
+        
+        /* HO-MIE STYLE TOP BAR */
+        .top-banner { background: var(--gold); color: black; text-align: center; padding: 10px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; }
 
-        .container {
-            width: 90%;
-            max-height: 95vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            text-align: center;
-            border: 8px solid #c0c0c0; /* Slightly thinner silver border */
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        /* HERO SECTION */
+        header { height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('your-storefront-image.jpg'); background-size: cover; background-position: center; }
+        header h1 { font-size: 3rem; margin-bottom: 10px; letter-spacing: 4px; color: var(--gold); }
+        header p { font-size: 1.2rem; max-width: 600px; padding: 0 20px; }
 
-        h1 {
-            font-size: 8vw; /* Reduced from 12vw to fit mobile better */
-            line-height: 1.2;
-            margin: 0;
-            font-family: serif;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px #d4af37;
-        }
+        /* IMPACT STRIP */
+        .impact-strip { display: flex; justify-content: space-around; background: #222; padding: 40px 10px; border-top: 1px solid var(--gold); border-bottom: 1px solid var(--gold); }
+        .stat { text-align: center; }
+        .stat h2 { color: var(--gold); margin: 0; font-size: 2rem; }
+        .stat p { margin: 5px 0 0; font-size: 0.9rem; text-transform: uppercase; }
 
-        .quote-box {
-            border-left: 3px solid #c0c0c0;
-            padding: 10px 15px;
-            margin: 15px 5%;
-            background: rgba(255,255,255,0.05);
-        }
+        /* DRINK GRID (The Signature 14) */
+        .section-title { text-align: center; margin: 60px 0 30px; font-size: 2rem; color: var(--gold); text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 0 20px; }
+        .card { background: #2a2a2a; border-radius: 10px; overflow: hidden; transition: 0.3s; border: 1px solid transparent; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card img { width: 100%; height: 350px; object-fit: cover; }
+        .card-info { padding: 20px; text-align: center; }
+        .card-info h3 { margin: 0; color: var(--white); }
+        .card-info p { color: #aaa; font-size: 0.9rem; }
 
-        .quote-text {
-            font-size: 4.5vw; /* Scaled down for readability */
-            color: #fff;
-            font-style: italic;
-            margin: 0;
-        }
+        /* POD BOOKING FORM */
+        .booking-section { background: #111; padding: 60px 20px; margin-top: 60px; }
+        .booking-form { max-width: 500px; margin: 0 auto; background: #222; padding: 30px; border-radius: 15px; border-left: 5px solid var(--violet); }
+        .booking-form input, .booking-form select, .booking-form button { width: 100%; padding: 12px; margin: 10px 0; border-radius: 5px; border: none; font-size: 1rem; }
+        .booking-form button { background: var(--violet); color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .booking-form button:hover { background: #6a00cc; }
 
-        .personal-note {
-            color: #d4af37;
-            font-size: 3vw;
-            margin-bottom: 10px;
-        }
-
-        .login-btn {
-            background: linear-gradient(45deg, #cd7f32, #ffd700);
-            color: #000;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 50px;
-            border: 1px solid #fff;
-            white-space: nowrap;
-        }
+        footer { padding: 40px; text-align: center; font-size: 0.8rem; color: #666; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome To<br>Members Lounge</h1>
-        <br>
 
-        <div class="quote-box">
-            <p class="quote-text">
-                "At Infinity Link, we build a world where your presence is the power."
-            </p>
+    <div class="top-banner">100% OF PROFITS SUPPORT THE FOUNDATION PROJECT MISSION</div>
+
+    <header>
+        <h1>INFINITY LINK</h1>
+        <p>A High-Tech Safe Zone featuring the Vitality Press Juice Bar & Private Cyber Lounge.</p>
+    </header>
+
+    <div class="impact-strip">
+        <div class="stat">
+            <h2>14</h2>
+            <p>Signature Nootropics</p>
         </div>
-
-        <p class="personal-note">
-                 </p>
-
-        <a href="infinitylink.html" class="login-btn">Secure Login</a>
+        <div class="stat">
+            <h2>$1.19M</h2>
+            <p>Projected Social Impact</p>
+        </div>
+        <div class="stat">
+            <h2>14</h2>
+            <p>Private Safe Pods</p>
+        </div>
     </div>
+
+    <section id="drinks">
+        <h2 class="section-title">The Signature 14</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="kaleb-moon.png" alt="Kaleb Moon">
+                <div class="card-info">
+                    <h3>Kaleb Moon</h3>
+                    <p>Collagen & Zinc Vitality Press</p>
+                    <span style="color:var(--gold)">$12.50</span>
+                </div>
+            </div>
+            <div class="card">
+                <img src="cookies-and-code.png" alt="Cookies & Code">
+                <div class="card-info">
+                    <h3>Cookies & Code</h3>
+                    <p>Obsidian Charcoal & Whey Protein</p>
+                    <span style="color:var(--gold)">$11.50</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="booking-section">
+        <h2 class="section-title">Book a Private Pod</h2>
+        <div class="booking-form">
+            <p style="text-align: center; color: var(--violet);">UPSTAIRS CYBER LOUNGE | $10/HR WALK-IN</p>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <select>
+                <option>Select a Pod (1-14)</option>
+                <option>Pod 1 (Window View)</option>
+                <option>Pod 13 (High Privacy)</option>
+            </select>
+            <input type="datetime-local">
+            <button type="submit">RESERVE MY SAFE ZONE</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 INFINITY LINK | POWERING THE FOUNDATION PROJECT</p>
+<footer>
 </body>
 </html>
