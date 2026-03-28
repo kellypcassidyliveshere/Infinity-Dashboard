@@ -344,10 +344,73 @@
         font-size: 0.95rem;
         letter-spacing: 1px;
     }
+<style>
+    /* 1. The Container: This stops the whole screen from swiping */
+    .drinks-section {
+        width: 100%;
+        background: #000;
+        padding: 20px 0;
+        overflow: hidden; /* Keeps the mess inside */
+    }
+
+    .carousel-view {
+        display: flex;
+        overflow-x: auto; /* Horizontal scroll only */
+        overflow-y: hidden; /* Stops vertical "whole screen" wiggle */
+        white-space: nowrap;
+        padding: 0 20px 20px 20px;
+        -webkit-overflow-scrolling: touch; /* Smooth swipe on iPhone/Android */
+        scroll-snap-type: x mandatory; /* Makes cards "snap" into place */
+        scrollbar-width: none;
+    }
+
+    .carousel-view::-webkit-scrollbar { display: none; }
+
+    /* 2. The Cards */
+    .drink-card {
+        flex: 0 0 280px; /* Fixed width for every drink */
+        margin-right: 15px;
+        background: #111;
+        border: 2px solid #8a2be2;
+        border-radius: 15px;
+        display: inline-block;
+        vertical-align: top;
+        white-space: normal;
+        scroll-snap-align: start;
+    }
+
+    .drink-image {
+        width: 100%;
+        height: 380px; 
+        object-fit: cover;
+        display: block;
+        border-bottom: 1px solid #8a2be2;
+    }
+
+    .drink-info {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .drink-title {
+        color: #00ffcc;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        margin: 0;
+    }
+
+    /* 3. Your Neon Pink Price */
+    .drink-price {
+        color: #ff00ff; 
+        font-weight: bold;
+        margin-top: 8px;
+        font-family: monospace;
+        font-size: 1.1rem;
+    }
 </style>
 
-<div class="carousel-view">
-    <div class="carousel-track">
+<div class="drinks-section">
+    <div class="carousel-view">
         
         <div class="drink-card">
             <img src="assets/drinks/kalebmoon.png" class="drink-image">
@@ -460,8 +523,6 @@
                 <div class="drink-price">[ PRICE: $10.50 ]</div>
             </div>
         </div>
-
-    </div>
 </div>
         </div>
         <p style="text-align:center; color:var(--violet); font-size:0.7rem;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
