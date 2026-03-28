@@ -227,50 +227,243 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+<style>
+    /* The outer container that hides the overflow */
+    .carousel-container {
+        width: 100%;
+        overflow-x: auto; /* Allows swiping/scrolling */
+        white-space: nowrap; /* Keeps everything on one line */
+        padding: 20px 0;
+        scrollbar-width: none; /* Hides scrollbar on Firefox */
+        -ms-overflow-style: none; /* Hides scrollbar on IE/Edge */
+    }
+    
+    .carousel-container::-webkit-scrollbar {
+        display: none; /* Hides scrollbar on Chrome/Safari */
+    }
+
+    /* The inner track that holds the cards */
+    .drinks-carousel {
+        display: inline-flex;
+        gap: 20px;
+        padding-left: 20px;
+    }
+
+    .drink-card {
+        flex: 0 0 280px; /* Each card stays exactly 280px wide */
+        border: 2px solid #8a2be2; 
+        border-radius: 15px;
+        overflow: hidden;
+        background: #111;
+        display: inline-block;
+        vertical-align: top;
+        white-space: normal; /* Allows text inside the card to wrap normally */
+    }
+
+    .drink-image {
+        width: 100%;
+        display: block;
+    }
+
+    .drink-info {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .drink-title {
+        color: #00ffcc;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0 0 5px 0;
+        font-size: 1.2rem;
+    }
+
+    .drink-price {
+        color: #ff00ff; /* Bright Neon Pink */
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 1rem;
+    }
+<style>
+    /* Carousel Container */
+    .carousel-view {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 20px 0;
+        scrollbar-width: none; /* Hide scrollbar Firefox */
+        -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+        background-color: #000;
+    }
+    
+    .carousel-view::-webkit-scrollbar {
+        display: none; /* Hide scrollbar Chrome/Safari */
+    }
+
+    .carousel-track {
+        display: inline-flex;
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .drink-card {
+        flex: 0 0 260px; /* Consistent card width */
+        border: 2px solid #8a2be2; 
+        border-radius: 15px;
+        overflow: hidden;
+        background: #111;
+        display: inline-block;
+        vertical-align: top;
+        white-space: normal;
+    }
+
+    .drink-image {
+        width: 100%;
+        display: block;
+        border-bottom: 1px solid #8a2be2;
+    }
+
+    .drink-info {
+        padding: 12px;
+        text-align: left;
+    }
+
+    .drink-title {
+        color: #00ffcc;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin: 0 0 5px 0;
+        font-size: 1.1rem;
+    }
+
+    /* Bright Pink Price - Replaces Status */
+    .drink-price {
+        color: #ff00ff; 
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        letter-spacing: 1px;
+    }
 </style>
 
-    <section class="carousel-section">
-        <h2 class="section-header">VITALITY PRESS</h2>
+<div class="carousel-view">
+    <div class="carousel-track">
         
-        <div class="carousel-wrapper">
-            <div class="drink-card">
-                <img src="neon-green.jpg" alt="Neon Green">
-                <div class="card-content">
-                    <h3>NEON GREEN</h3>
-                    <p>ZINC & CHLOROPHYLL BUILD</p>
-                    <span style="color:var(--cyan); font-size:0.7rem;">[ STATUS: ONLINE ]</span>
-                </div>
-            </div>
-
-            <div class="drink-card">
-                <img src="ruby-rush.jpg" alt="Ruby Rush">
-                <div class="card-content">
-                    <h3>RUBY RUSH</h3>
-                    <p>OBSIDIAN CHARCOAL BLEND</p>
-                    <span style="color:var(--cyan); font-size:0.7rem;">[ STATUS: ONLINE ]</span>
-                </div>
-            </div>
-
-            <div class="drink-card">
-                <img src="blue-bolt.jpg" alt="Blue Bolt">
-                <div class="card-content">
-                    <h3>BLUE BOLT</h3>
-                    <p>E3 LIVE & MATCHA FUEL</p>
-                    <span style="color:var(--magenta); font-size:0.7rem;">[ STATUS: PENDING ]</span>
-                </div>
-            </div>
-
-            <div class="drink-card">
-                <div style="height:300px; display:flex; align-items:center; justify-content:center; color:#333;">
-                    <i class="fas fa-plus fa-3x"></i>
-                </div>
-                <div class="card-content">
-                    <h3>SYSTEM LOAD</h3>
-                    <p>ADD SIGNATURE DATA</p>
-                </div>
+        <div class="drink-card">
+            <img src="assets/drinks/kalebmoon.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">KALEB MOON</h3>
+                <div class="drink-price">[ PRICE: $12.50 ]</div>
             </div>
         </div>
-        
+
+        <div class="drink-card">
+            <img src="assets/drinks/maiagold.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">MAIA GOLD</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/rubyrush.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">RUBY RUSH</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/neongreen.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">NEON GREEN</h3>
+                <div class="drink-price">[ PRICE: $9.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/electricyuzu.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">ELECTRIC YUZU</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/theredline.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">THE RED LINE</h3>
+                <div class="drink-price">[ PRICE: $10.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/purplerain.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">PURPLE RAIN</h3>
+                <div class="drink-price">[ PRICE: $14.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/zerolatency.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">ZERO LATENCY</h3>
+                <div class="drink-price">[ PRICE: $12.00 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/bluemacha.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">BLUE MATCHA</h3>
+                <div class="drink-price">[ PRICE: $13.00 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/biscoffbrain.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">BISCOFF BRAIN</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/saltedcaramel.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">SALTED CARAMEL</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/dragonfruitglow.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">DRAGONFRUIT GLOW</h3>
+                <div class="drink-price">[ PRICE: $12.00 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/cookiesncode.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">COOKIES & CODE</h3>
+                <div class="drink-price">[ PRICE: $11.50 ]</div>
+            </div>
+        </div>
+
+        <div class="drink-card">
+            <img src="assets/drinks/tarotech.png" class="drink-image">
+            <div class="drink-info">
+                <h3 class="drink-title">TARO TECH</h3>
+                <div class="drink-price">[ PRICE: $10.50 ]</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+        </div>
         <p style="text-align:center; color:var(--violet); font-size:0.7rem;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
     </section>
 
