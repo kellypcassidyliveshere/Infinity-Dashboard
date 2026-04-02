@@ -3,255 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFINITY LINK | ACCESS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@300;600&display=swap" rel="stylesheet">
+    <title>Infinity Link - Signature Series</title>
     <style>
         :root {
-            --cyan: #00f0ff;
-            --magenta: #ff00ff;
-            --bg: #020202;
-            --glass: rgba(255, 255, 255, 0.03);
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --cyber-black: #050505;
         }
 
         body {
-            background-color: var(--bg);
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
             margin: 0;
+            padding: 0;
+            background-color: var(--cyber-black);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow-x: hidden;
         }
 
-        /* 1. MINIMALIST TOP BAR */
-        .top-nav {
-            background: linear-gradient(90deg, rgba(255,0,255,0.2), rgba(0,240,255,0.2));
-            backdrop-filter: blur(10px);
-            text-align: center;
-            padding: 8px;
-            font-family: 'Orbitron';
-            font-size: 0.7rem;
-            letter-spacing: 3px;
-            border-bottom: 1px solid rgba(0,240,255,0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        /* 2. DYNAMIC CIRCUIT HEADER */
-        header {
-            height: 40vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
+        /* --- SECTION 1: ANIMATED CIRCUIT BACKGROUND --- */
+        .header-container {
             position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
+            border-bottom: 2px solid var(--neon-blue);
         }
 
-        header::before {
-            content: "";
+        .circuit-bg {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background-image: linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            transform: perspective(500px) rotateX(60deg);
-            top: -50%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.4;
         }
 
-        .main-title {
-            font-family: 'Orbitron';
-            font-size: 3rem;
-            letter-spacing: 15px;
-            text-shadow: 0 0 20px var(--cyan);
-            margin: 0;
+        /* Moving circuit lines animation */
+        .circuit-line {
+            stroke: var(--neon-blue);
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 10s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+
+        h1 {
+            position: relative;
             z-index: 2;
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            text-shadow: 0 0 20px var(--neon-blue);
+            margin: 0;
         }
 
-        /* 3. FLOATING 3D CAROUSEL */
-        .carousel-section {
+        /* --- SECTION 2: DRINK CAROUSEL --- */
+        .carousel-container {
             padding: 50px 0;
-            perspective: 1000px;
-        }
-
-        .drink-shelf {
             display: flex;
             overflow-x: auto;
             gap: 30px;
-            padding: 40px;
+            padding-left: 50px;
             scrollbar-width: none;
         }
 
-        .drink-shelf::-webkit-scrollbar { display: none; }
+        .carousel-container::-webkit-scrollbar { display: none; }
 
-        .drink-item {
-            flex: 0 0 220px;
-            transition: 0.5s ease;
-            filter: grayscale(0.5);
+        .drink-card {
+            min-width: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            border-radius: 15px;
+            padding: 20px;
             text-align: center;
+            transition: transform 0.3s;
         }
 
-        .drink-item:hover {
-            filter: grayscale(0);
-            transform: translateY(-20px) scale(1.1);
+        .drink-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
         }
 
-        .drink-item img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .drink-card img {
+            width: 180px; /* Uniform bottle size */
+            height: 350px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0,242,255,0.5));
         }
 
-        .drink-label {
-            margin-top: 15px;
-            font-family: 'Orbitron';
-            font-size: 0.8rem;
-            color: var(--cyan);
-        }
+        .drink-card h3 { margin: 15px 0 5px; color: var(--neon-blue); }
+        .drink-card p { font-size: 0.9rem; opacity: 0.8; }
 
-        /* 4. THE TIDY FOUNDER FRAME */
-        .content-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .glass-panel {
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 2px;
-            margin-bottom: 60px;
-        }
-
-        .quote-text {
-            font-size: 1.4rem;
-            font-weight: 300;
-            line-height: 1.8;
-            text-align: center;
-            border-left: 3px solid var(--magenta);
-            padding-left: 20px;
-        }
-
-        /* 5. MINIMALIST CHAT HUD (THE LINK) */
-        .ai-hud {
+        /* --- SECTION 3: CIRCLE CHATBOT --- */
+        #chat-bot {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 400px;
-            background: rgba(0,0,0,0.9);
-            border: 1px solid var(--cyan);
-            padding: 15px;
+            bottom: 40px;
+            right: 40px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, var(--neon-blue), var(--neon-purple));
+            border-radius: 50%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            z-index: 2000;
-            box-shadow: 0 0 30px rgba(0,240,255,0.2);
-        }
-
-        .ai-hud button {
-            background: none;
-            border: 1px solid var(--magenta);
-            color: var(--magenta);
-            padding: 8px 12px;
-            font-family: 'Orbitron';
-            font-size: 0.6rem;
+            justify-content: center;
             cursor: pointer;
+            box-shadow: 0 0 30px var(--neon-blue);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 100;
+            text-align: center;
+            border: 4px solid white;
         }
 
-        .impact-value {
-            font-family: 'Orbitron';
-            color: var(--yellow);
-            font-size: 2rem;
-            text-align: center;
-            display: block;
-            margin-top: 10px;
+        #chat-bot:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px var(--neon-purple);
+        }
+
+        #chat-bot:active { transform: scale(0.9); }
+
+        .bot-status {
+            position: absolute;
+            bottom: -30px;
+            width: 250px;
+            right: 0;
+            text-align: right;
+            font-style: italic;
+            color: var(--neon-blue);
+            font-size: 0.8rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        10% PROFIT CONTRIBUTED TO THE FOUNDATION PROJECT
+    <div class="header-container">
+        <svg class="circuit-bg" viewBox="0 0 1000 300">
+            <path class="circuit-line" d="M0,50 L200,50 L250,100 L400,100 L450,50 L800,50 L850,100 L1000,100" />
+            <path class="circuit-line" style="animation-delay: -2s;" d="M0,250 L150,250 L200,200 L500,200 L550,250 L1000,250" />
+            <path class="circuit-line" style="animation-delay: -5s;" d="M100,0 L100,150 L150,200 L300,200" />
+            <path class="circuit-line" style="animation-delay: -7s;" d="M900,300 L900,150 L850,100 L700,100" />
+            <circle cx="250" cy="100" r="3" fill="cyan" />
+            <circle cx="500" cy="200" r="3" fill="cyan" />
+        </svg>
+        <h1>Infinity Link</h1>
     </div>
 
-    <header>
-        <h1 class="main-title">INFINITY LINK</h1>
-        <p style="letter-spacing: 8px; font-size: 0.7rem; color: var(--cyan);">SYSTEM ACCESS GRANTED</p>
-    </header>
-
-    <div class="carousel-section">
-        <div class="drink-shelf">
-            <div class="drink-item">
-                <img src="drink1.jpg" alt="Neon Green">
-                <div class="drink-label">NEON GREEN</div>
-            </div>
-            <div class="drink-item">
-                <img src="drink2.jpg" alt="Ruby Rush">
-                <div class="drink-label">RUBY RUSH</div>
-            </div>
-            <div class="drink-item" style="border: 2px solid gold;">
-                <img src="kalebmoon.png" alt="Kaleb Moon">
-                <div class="drink-label" style="color: gold;">KALEB MOON</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="content-container">
-        <div class="glass-panel">
-            <div class="quote-text">
-                "We didn't just build a lounge; we built a safe zone. Technology should serve the human spirit."
-            </div>
-            <p style="text-align: right; color: var(--magenta); font-family: 'Orbitron'; font-size: 0.8rem; margin-top: 20px;">
-                — KELLY-ANN CASSIDY // EXECUTIVE CHAIRMAN
-            </p>
+    <div class="carousel-container" id="carousel">
         </div>
 
-        <div class="glass-panel" style="border-color: var(--magenta);">
-            <h3 style="font-family: 'Orbitron'; font-size: 0.8rem; text-align: center; margin-bottom: 20px;">FOUNDATION IMPACT TRACKER</h3>
-            <span class="impact-value">$68,700.00</span>
-            <p id="cycle-text" style="text-align: center; color: var(--cyan); font-size: 0.8rem; margin-top: 15px;">INITIALIZING DATA...</p>
-        </div>
-    </div>
-
-    <div class="ai-hud">
-        <div style="font-size: 0.7rem;">
-            <span style="color: var(--cyan); font-family: 'Orbitron';">THE LINK:</span> 
-            <span id="ai-status">WAITING FOR INPUT...</span>
-        </div>
-        <div style="display: flex; gap: 10px;">
-            <button onclick="updateAI('PERFORMANCE')">PERFORMANCE</button>
-            <button onclick="updateAI('RECOVERY')">RECOVERY</button>
-        </div>
+    <div id="chat-bot" onclick="startNectarChat()">
+        WELCOME
+        <div class="bot-status" id="bot-output">Tap to find your mood...</div>
     </div>
 
     <script>
-        function updateAI(mode) {
-            const status = document.getElementById('ai-status');
-            if(mode === 'PERFORMANCE') {
-                status.innerText = "OPTIMIZING VITALITY PRESS...";
-                speak("Optimization sequence initiated.");
-            } else {
-                status.innerText = "INITIATING SYSTEM RECOVERY...";
-                speak("Recovery protocol active.");
-            }
-        }
+        // Drink Database from your Specs
+        const drinks = [
+            { name: "Kaleb Moon", img: "kalebmoon.png", mood: "wellness", desc: "Electric Blue Nebula" },
+            { name: "Maia Gold", img: "maiagold.png", mood: "healing", desc: "Anti-Inflammatory Elixir" },
+            { name: "Neon Green", img: "neongreen.png", mood: "clarity", desc: "Metabolism Kick" },
+            { name: "Electric Yuzu", img: "electricyuzu.png", mood: "recovery", desc: "Electrolyte Tonic" },
+            { name: "Ruby Rush", img: "rubyrush.png", mood: "energy", desc: "Power Cycle" },
+            { name: "Purple Rain", img: "purplerain.png", mood: "restoration", desc: "Longevity Antioxidant" },
+            { name: "Zero Latency", img: "zerolatency.png", mood: "focus", desc: "Nootropic Cold Brew" },
+            { name: "Blue Matcha Bolt", img: "bluemacha.png", mood: "calm", desc: "Cognitive Calm" },
+            { name: "Biscoff Brain-Boost", img: "biscoffbrain.png", mood: "reward", desc: "Neuro-Regenerative" },
+            { name: "Salted Caramel Surge", img: "saltedcaramel.png", mood: "stress", desc: "Cortisol Crusher" }
+        ];
+
+        // Populate Carousel
+        const carousel = document.getElementById('carousel');
+        drinks.forEach(drink => {
+            carousel.innerHTML += `
+                <div class="drink-card">
+                    <img src="${drink.img}" alt="${drink.name}">
+                    <h3>${drink.name}</h3>
+                    <p>${drink.desc}</p>
+                </div>
+            `;
+        });
+
+        // --- CHATBOT LOGIC ---
+        const botOutput = document.getElementById('bot-output');
 
         function speak(text) {
-            const msg = new SpeechSynthesisUtterance(text);
-            msg.rate = 0.9;
-            window.speechSynthesis.speak(msg);
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = 1.2;
+            utterance.rate = 1;
+            window.speechSynthesis.speak(utterance);
         }
 
-        const items = ["Emergency Housing", "Disability Advocacy", "Life Skills Training", "Community Support"];
-        let i = 0;
-        setInterval(() => {
-            document.getElementById('cycle-text').innerText = "ALLOCATED TO: " + items[i];
-            i = (i + 1) % items.length;
-        }, 3000);
+        function startNectarChat() {
+            speak("What mood do you require?");
+            botOutput.innerText = "Listening for mood...";
+
+            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!Recognition) {
+                alert("Speech recognition not supported in this browser.");
+                return;
+            }
+
+            const recognition = new Recognition();
+            recognition.start();
+
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript.toLowerCase();
+                botOutput.innerText = `You said: "${transcript}"`;
+                recommendDrink(transcript);
+            };
+        }
+
+        function recommendDrink(input) {
+            let recommendation = "I suggest a fresh water. Try saying energy, focus, or stress.";
+            
+            if (input.includes("focus") || input.includes("study")) {
+                recommendation = "For peak performance, I recommend Zero Latency. It's a nootropic cold brew with zero crash.";
+            } else if (input.includes("energy") || input.includes("tired")) {
+                recommendation = "You need Ruby Rush. Pomegranate and Guarana to revitalize your system.";
+            } else if (input.includes("stress") || input.includes("anxious")) {
+                recommendation = "Calm your system with Salted Caramel Surge. The Ashwagandha will crush your cortisol levels.";
+            } else if (input.includes("mood") || input.includes("happy")) {
+                recommendation = "Try the Kaleb Moon. It's a wellness boost that looks like a blue nebula.";
+            } else if (input.includes("calm") || input.includes("relax")) {
+                recommendation = "The Blue Matcha Bolt is your best choice for cognitive calm.";
+            }
+
+            speak(recommendation);
+            botOutput.innerText = "Recommendation sent.";
+        }
     </script>
 </body>
 </html>
