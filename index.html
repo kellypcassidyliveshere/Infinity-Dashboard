@@ -3,743 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFINITY LINK | Digital Safe Zone</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Infinity Link | Virtual Access Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap');
-
         :root {
-            --obsidian: #050505;
-            --cyan: #00ffff;
-            --violet: #8b00ff;
+            --cyan: #00f2ff;
             --magenta: #ff00ff;
-            --neon-text: #fff;
-            --cyan-glow: 0 0 10px rgba(0, 255, 255, 0.8);
-            --violet-glow: 0 0 15px rgba(139, 0, 255, 0.8);
+            --purple: #7000ff;
+            --bg: #000000;
         }
 
-        body { 
-            margin: 0; 
-            font-family: 'Rajdhani', sans-serif; 
-            background: var(--obsidian); 
-            color: var(--neon-text); 
-            overflow-x: hidden; 
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
         }
 
-        /* SYSTEM STATUS TOP BAR */
-        .system-banner {
-            background: rgba(0, 0, 0, 0.95);
-            color: var(--cyan);
-            text-align: center;
-            padding: 12px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            border-bottom: 2px solid var(--violet);
-            box-shadow: var(--violet-glow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header {
-            height: 60vh;
+        /* --- HERO & CIRCUIT SECTION --- */
+        .hero-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background: black;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,1)), url('your-party-visual.jpg');
-            background-size: cover;
+            overflow: hidden;
         }
 
-        .hero-title {
+        #circuitCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .glow-title {
+            position: relative;
+            z-index: 2;
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
-            letter-spacing: 10px;
-            color: var(--neon-text);
-            text-shadow: var(--cyan-glow);
-        }
-
-        /* --- THE CAROUSEL ENGINE --- */
-        .carousel-section {
-            padding: 40px 0;
-            background: #000;
-        }
-
-        .section-header {
-            text-align: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
             color: var(--cyan);
-            margin-bottom: 30px;
-            letter-spacing: 5px;
+            text-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
+            text-align: center;
         }
 
-        /* This container enables the horizontal swipe */
-        .carousel-wrapper {
-            display: flex;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory; /* Makes it "snap" to each card */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-            padding: 20px 20px 40px 20px;
-            gap: 20px;
-        }
-
-        /* Custom Scrollbar for the Carousel */
-        .carousel-wrapper::-webkit-scrollbar {
-            height: 4px;
-        }
-        .carousel-wrapper::-webkit-scrollbar-thumb {
-            background: var(--violet);
-            border-radius: 10px;
-            box-shadow: var(--violet-glow);
-        }
-
-        .drink-card {
-            flex: 0 0 85%; /* Shows most of one card and a peek of the next */
-            max-width: 320px;
-            scroll-snap-align: center; /* Centers the card when you scroll */
-            background: #111;
-            border: 1px solid var(--violet);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-        }
-
-        .drink-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-
-        .card-content {
-            padding: 20px;
-            background: #0a0a0a;
-            border-top: 1px solid var(--violet);
-        }
-
-        .card-content h3 { font-family: 'Orbitron', sans-serif; color: var(--cyan); margin: 0; font-size: 1.1rem; }
-        .card-content p { color: var(--magenta); font-size: 0.8rem; margin: 10px 0; letter-spacing: 1px; }
-
-
-
-.drink-card img {
-    max-height: 250px; /* Adjust this number until it matches Ruby Rush */
-    width: auto;
-    object-fit: contain; /* This prevents the "stretching" effect */
-    padding: 15px;      /* This adds space inside the purple border */
-    display: block;
-    margin: 0 auto;
-}
-
-        /* --- BOOKING MODULE --- */
-        .booking-form {
-            margin: 40px 20px;
-            padding: 30px;
-            background: #000;
-            border: 2px solid var(--cyan);
-            box-shadow: var(--cyan-glow);
-            border-radius: 10px;
-        }
-
-        input, select, .btn-activate {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background: #111;
-            border: 1px solid var(--violet);
-            color: #fff;
-            font-family: 'Rajdhani', sans-serif;
-            box-sizing: border-box;
-        }
-
-        .btn-activate {
-            background: var(--violet);
+        /* --- FLOATING AI AGENT HUD --- */
+        #link-agent {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid var(--cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            z-index: 10000;
             font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            letter-spacing: 2px;
-            cursor: pointer;
-            border: none;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
         }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; }
-.hero-container {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
+        #agent-header {
+            background: var(--cyan);
+            color: black;
+            padding: 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 
-#circuitCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
+        #chat-box {
+            padding: 15px;
+            max-height: 350px;
+            overflow-y: auto;
+            border-bottom: 1px solid #333;
+        }
 
-.glow-text {
-    position: relative;
-    z-index: 2;
-    font-size: 3rem;
-    color: var(--cyan);
-    text-shadow: 0 0 15px var(--cyan);
-    pointer-events: none; /* Allows clicks to go through to canvas if needed */
-}
+        .agent-msg {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            color: #e0e0e0;
+        }
 
+        .diagnostic-options button {
+            display: block;
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--magenta);
+            color: var(--magenta);
+            padding: 10px;
+            margin-top: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .diagnostic-options button:hover {
+            background: var(--magenta);
+            color: white;
+            box-shadow: 0 0 15px var(--magenta);
+        }
+
+        /* Responsive Fix for Mobile */
+        @media (max-width: 600px) {
+            #link-agent {
+                width: 90%;
+                left: 5%;
+                bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="system-banner">
-        <i class="fas fa-link"></i> 100% PROFIT TO THE FOUNDATION PROJECT
+    <div class="hero-container">
+        <canvas id="circuitCanvas"></canvas>
+        <h1 class="glow-title">INFINITY LINK</h1>
     </div>
 
-<div class="hero-container">
-    <canvas id="circuitCanvas"></canvas>
-    <h1 class="glow-text">INFINITY LINK</h1>
-</div>
-<div class="mission-plaque">
-    <div class="plaque-header">
-        <i class="fas fa-fingerprint"></i> A MESSAGE FROM THE FOUNDER
-    </div>
-    <p class="mission-text">
-        "Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. 
-        Every juice pressed and every pod booked directly funds <strong>The Foundation Project</strong>, 
-        supporting victims of abuse, homelessness, and disability right here in our community. 
-        This is a space for vitality, for focus, and for the belief that technology should serve 
-        the human spirit. Thank you for being part of the link."
-    </p>
-    <div class="founder-sig">
-        - Kelly-Ann Cassidy, <span style="color:var(--cyan)">Executive Chairman</span>
-    </div>
-</div>
-
-<style>
-.mission-plaque {
-    background: rgba(139, 0, 255, 0.1);
-    border-left: 3px solid var(--magenta);
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    text-align: left;
-    backdrop-filter: blur(5px);
-    border-radius: 0 15px 15px 0;
-    animation: fadeIn 2s ease-in;
-}
-
-.plaque-header {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--cyan);
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-shadow: var(--cyan-glow);
-}
-
-.mission-text {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #e0e0e0;
-    font-style: italic;
-    margin: 0;
-}
-
-.founder-sig {
-    margin-top: 15px;
-    font-family: 'Orbitron', sans-serif;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-    text-align: right;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-<style>
-    /* The outer container that hides the overflow */
-    .carousel-container {
-        width: 100%;
-        overflow-x: auto; /* Allows swiping/scrolling */
-        white-space: nowrap; /* Keeps everything on one line */
-        padding: 20px 0;
-        scrollbar-width: none; /* Hides scrollbar on Firefox */
-        -ms-overflow-style: none; /* Hides scrollbar on IE/Edge */
-    }
-    
-    .carousel-container::-webkit-scrollbar {
-        display: none; /* Hides scrollbar on Chrome/Safari */
-    }
-
-    /* The inner track that holds the cards */
-    .drinks-carousel {
-        display: inline-flex;
-        gap: 20px;
-        padding-left: 20px;
-    }
-
-    .drink-card {
-        flex: 0 0 280px; /* Each card stays exactly 280px wide */
-        border: 2px solid #8a2be2; 
-        border-radius: 15px;
-        overflow: hidden;
-        background: #111;
-        display: inline-block;
-        vertical-align: top;
-        white-space: normal; /* Allows text inside the card to wrap normally */
-    }
-
-    .drink-image {
-        width: 100%;
-        display: block;
-    }
-
-    .drink-info {
-        padding: 15px;
-        text-align: left;
-    }
-
-    .drink-title {
-        color: #00ffcc;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        margin: 0 0 5px 0;
-        font-size: 1.2rem;
-    }
-
-    .drink-price {
-        color: #ff00ff; /* Bright Neon Pink */
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 1rem;
-    }
-<style>
-    /* Carousel Container */
-    .carousel-view {
-        width: 100%;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding: 20px 0;
-        scrollbar-width: none; /* Hide scrollbar Firefox */
-        -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
-        background-color: #000;
-    }
-    
-    .carousel-view::-webkit-scrollbar {
-        display: none; /* Hide scrollbar Chrome/Safari */
-    }
-
-    .carousel-track {
-        display: inline-flex;
-        gap: 15px;
-        padding: 0 20px;
-    }
-
-    .drink-card {
-        flex: 0 0 260px; /* Consistent card width */
-        border: 2px solid #8a2be2; 
-        border-radius: 15px;
-        overflow: hidden;
-        background: #111;
-        display: inline-block;
-        vertical-align: top;
-        white-space: normal;
-    }
-
-    .drink-image {
-        width: 100%;
-        display: block;
-        border-bottom: 1px solid #8a2be2;
-    }
-
-    .drink-info {
-        padding: 12px;
-        text-align: left;
-    }
-
-    .drink-title {
-        color: #00ffcc;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin: 0 0 5px 0;
-        font-size: 1.1rem;
-    }
-
-    /* Bright Pink Price - Replaces Status */
-    .drink-price {
-        color: #ff00ff; 
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.95rem;
-        letter-spacing: 1px;
-    }
-<style>
-    /* 1. The Container: This stops the whole screen from swiping */
-    .drinks-section {
-        width: 100%;
-        background: #000;
-        padding: 20px 0;
-        overflow: hidden; /* Keeps the mess inside */
-    }
-
-    .carousel-view {
-        display: flex;
-        overflow-x: auto; /* Horizontal scroll only */
-        overflow-y: hidden; /* Stops vertical "whole screen" wiggle */
-        white-space: nowrap;
-        padding: 0 20px 20px 20px;
-        -webkit-overflow-scrolling: touch; /* Smooth swipe on iPhone/Android */
-        scroll-snap-type: x mandatory; /* Makes cards "snap" into place */
-        scrollbar-width: none;
-    }
-
-    .carousel-view::-webkit-scrollbar { display: none; }
-
-    /* 2. The Cards */
-    .drink-card {
-        flex: 0 0 280px; /* Fixed width for every drink */
-        margin-right: 15px;
-        background: #111;
-        border: 2px solid #8a2be2;
-        border-radius: 15px;
-        display: inline-block;
-        vertical-align: top;
-        white-space: normal;
-        scroll-snap-align: start;
-    }
-
-    .drink-image {
-        width: 100%;
-        height: 380px; 
-        object-fit: cover;
-        display: block;
-        border-bottom: 1px solid #8a2be2;
-    }
-
-    .drink-info {
-        padding: 15px;
-        text-align: left;
-    }
-
-    .drink-title {
-        color: #00ffcc;
-        text-transform: uppercase;
-        font-size: 1.2rem;
-        margin: 0;
-    }
-
-    /* 3. Your Neon Pink Price */
-    .drink-price {
-        color: #ff00ff; 
-        font-weight: bold;
-        margin-top: 8px;
-        font-family: monospace;
-        font-size: 1.1rem;
-    }
-</style>
-
-<div class="drinks-section">
-    <div class="carousel-view">
-        
-        <div class="drink-card">
-            <img src="mymooloo.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">KALEB MOON</h3>
-                <div class="drink-price">[ PRICE: $12.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="maiagold1.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">MAIA GOLD</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/rubyrush.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">RUBY RUSH</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="neon-green.jpg" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">NEON GREEN</h3>
-                <div class="drink-price">[ PRICE: $9.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/electricyuzu.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">ELECTRIC YUZU</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/theredline.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">THE RED LINE</h3>
-                <div class="drink-price">[ PRICE: $10.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/purplerain.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">PURPLE RAIN</h3>
-                <div class="drink-price">[ PRICE: $14.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/zerolatency.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">ZERO LATENCY</h3>
-                <div class="drink-price">[ PRICE: $12.00 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/bluemacha.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">BLUE MATCHA</h3>
-                <div class="drink-price">[ PRICE: $13.00 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/biscoffbrain.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">BISCOFF BRAIN</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/saltedcaramel.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">SALTED CARAMEL</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/dragonfruitglow.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">DRAGONFRUIT GLOW</h3>
-                <div class="drink-price">[ PRICE: $12.00 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/cookiesncode.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">COOKIES & CODE</h3>
-                <div class="drink-price">[ PRICE: $11.50 ]</div>
-            </div>
-        </div>
-
-        <div class="drink-card">
-            <img src="assets/drinks/tarotech.png" class="drink-image">
-            <div class="drink-info">
-                <h3 class="drink-title">TARO TECH</h3>
-                <div class="drink-price">[ PRICE: $10.50 ]</div>
-            </div>
-        </div>
-</div>
-        </div>
-        <p style="text-align:center; color:var(--violet); font-size:0.7rem;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
-    </section>
-
-    <div class="booking-form">
-        <h2 style="color:var(--cyan); text-align:center; font-family:'Orbitron';">SECURE SAFE POD</h2>
-        <input type="text" placeholder="NAME / IDENTITY">
-        <input type="email" placeholder="CONTACT PROTOCOL">
-        <select>
-            <option>SELECT POD (01-14)</option>
-            <option>POD 01 - FRONT DECK</option>
-            <option>POD 13 - HIGH PRIVACY</option>
-        </select>
-        <button class="btn-activate">ACTIVATE SAFE ZONE</button>
-<section class="impact-footer">
-    <div class="impact-container">
-        <div class="impact-badge">
-            <span class="impact-number">10%</span>
-            <span class="impact-label">SOCIAL CONTRIBUTION</span>
-        </div>
-        <div class="impact-details">
-            <h4>THE FOUNDATION PROJECT</h4>
-            <p>
-                Every transaction at Infinity Link is a catalyst for change. 10% of our gross revenue 
-                is directly allocated to <strong>The Foundation Project</strong>, providing emergency housing, 
-                disability advocacy, and life-skills pathways for victims of abuse and homelessness in our community.
-            </p>
-        </div>
-    </div>
-</section>
-
-<style>
-.impact-footer {
-    background: rgba(0, 0, 0, 0.8);
-    border-top: 1px solid var(--cyan);
-    padding: 40px 20px;
-    margin-top: 50px;
-    box-shadow: 0 -10px 20px rgba(0, 255, 255, 0.05);
-}
-
-.impact-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.impact-badge {
-    flex: 0 0 150px;
-    height: 150px;
-    border: 2px solid var(--magenta);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 0 15px var(--magenta);
-}
-
-.impact-number {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2.5rem;
-    color: var(--magenta);
-    text-shadow: 0 0 10px var(--magenta);
-}
-
-.impact-label {
-    font-size: 0.6rem;
-    letter-spacing: 1px;
-    color: #fff;
-    text-align: center;
-}
-
-.impact-details h4 {
-    font-family: 'Orbitron', sans-serif;
-    color: var(--cyan);
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
-
-.impact-details p {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 1.1rem;
-    color: #ccc;
-    line-height: 1.5;
-    max-width: 700px;
-}
-
-@media (max-width: 600px) {
-    .impact-container { justify-content: center; text-align: center; }
-}
-</style>
-    </div>
-
-    <footer>
-        <p>INFINITY LINK | THE FOUNDATION PROJECT</p>
-        <p>115 UNION RD, ASCOT VALE, VIC</p>
-    </footer>
-<script>
-const canvas = document.getElementById('circuitCanvas');
-const ctx = canvas.getContext('2d');
-let w, h;
-
-function resize() {
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = 350;
-}
-window.addEventListener('resize', resize);
-resize();
-
-const lines = [];
-const conf = {
-    lineCount: 20,
-    colors: ['#00f2ff', '#ff00ff', '#7000ff']
-};
-
-class Line {
-    constructor() { this.reset(); }
-    reset() {
-        this.x = Math.random() * w;
-        this.y = Math.random() * h;
-        this.speed = 1 + Math.random() * 2;
-        this.color = conf.colors[Math.floor(Math.random() * conf.colors.length)];
-        this.dir = Math.random() > 0.5 ? 'h' : 'v';
-    }
-    draw() {
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        if(this.dir === 'h') ctx.lineTo(this.x + 20, this.y);
-        else ctx.lineTo(this.x, this.y + 20);
-        ctx.stroke();
-    }
-    update() {
-        if(this.dir === 'h') this.x += this.speed;
-        else this.y += this.speed;
-        if(this.x > w || this.y > h) this.reset();
-    }
-}
-
-for(let i=0; i<conf.lineCount; i++) lines.push(new Line());
-
-function loop() {
-    ctx.fillStyle = 'rgba(0,0,0,0.1)';
-    ctx.fillRect(0,0,w,h);
-    lines.forEach(l => { l.update(); l.draw(); });
-    requestAnimationFrame(loop);
-}
-loop();
-
-
-<script>
-function diagnose(goal) {
-    const chatBox = document.getElementById('chat-box');
-    let recommendation = "";
-
-    if (goal === 'performance') {
-        recommendation = "Strategy: [THE REDLINE]. Pharmaceutical-grade Citrulline Malate detected. Optimized for high-output sprints.";
-    } else if (goal === 'cognitive') {
-        recommendation = "Strategy: [ZERO LATENCY]. C8 MCT Oil and L-Theanine engaged. Eliminating neural lag.";
-    } else if (goal === 'recovery') {
-        recommendation = "Strategy: [PURPLE RAIN]. Trans-Resveratrol antioxidant sequence initiated for system restoration.";
-    }
-
-    chatBox.innerHTML += `<p class='agent-msg' style='color:var(--cyan)'>User Selected: ${goal.toUpperCase()}</p>`;
-    chatBox.innerHTML += `<p class='agent-msg'>${recommendation}</p>`;
-}
-</script>
     <div id="link-agent">
         <div id="agent-header">SYSTEM INTELLIGENCE: THE LINK</div>
         <div id="chat-box">
-            <p class="agent-msg">System Initialized... <br>Welcome to the Infinity Link Hub.</p>
-            <p class="agent-msg">Please select your current optimization goal:</p>
-            <div class="diagnostic-options">
+            <p class="agent-msg">System Initialized... <br>Welcome to the Virtual Access Hub.</p>
+            <p class="agent-msg">Analyze optimization requirements:</p>
+            <div class="diagnostic-options" id="options">
                 <button onclick="diagnose('performance')">[ PERFORMANCE ]</button>
                 <button onclick="diagnose('cognitive')">[ COGNITIVE FOCUS ]</button>
                 <button onclick="diagnose('recovery')">[ SYSTEM RECOVERY ]</button>
@@ -747,8 +143,79 @@ function diagnose(goal) {
         </div>
     </div>
 
-    </body>
-</html>
+    <script>
+        /* --- CIRCUIT ANIMATION LOGIC --- */
+        const canvas = document.getElementById('circuitCanvas');
+        const ctx = canvas.getContext('2d');
+        let w, h;
 
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = 400;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        const lines = [];
+        const colors = ['#00f2ff', '#ff00ff', '#7000ff'];
+
+        class Line {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = Math.random() * h;
+                this.speed = 0.5 + Math.random() * 1.5;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.dir = Math.random() > 0.5 ? 'h' : 'v';
+                this.length = 15 + Math.random() * 30;
+            }
+            draw() {
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                if(this.dir === 'h') ctx.lineTo(this.x + this.length, this.y);
+                else ctx.lineTo(this.x, this.y + this.length);
+                ctx.stroke();
+            }
+            update() {
+                if(this.dir === 'h') this.x += this.speed;
+                else this.y += this.speed;
+                if(this.x > w || this.y > h) this.reset();
+            }
+        }
+
+        for(let i=0; i<30; i++) lines.push(new Line());
+
+        function loop() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
+            ctx.fillRect(0, 0, w, h);
+            lines.forEach(l => { l.update(); l.draw(); });
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+        /* --- AGENT DIAGNOSTIC LOGIC --- */
+        function diagnose(goal) {
+            const chat = document.getElementById('chat-box');
+            let res = "";
+            let drink = "";
+
+            if(goal === 'performance') {
+                drink = "THE REDLINE";
+                res = "Citrulline Malate activation sequence required. Directing to IL-SIG-06.";
+            } else if(goal === 'cognitive') {
+                drink = "ZERO LATENCY";
+                res = "C8 MCT Oil & L-Theanine neural bridge suggested. Engaging IL-NN-01.";
+            } else if(goal === 'recovery') {
+                drink = "PURPLE RAIN";
+                res = "Trans-Resveratrol antioxidant flush initiated. Initializing IL-SIG-07.";
+            }
+
+            chat.innerHTML += `<p class='agent-msg' style='color:var(--cyan)'> > Goal: ${goal.toUpperCase()}</p>`;
+            chat.innerHTML += `<p class='agent-msg'>System Recommendation: <strong>${drink}</strong>. ${res}</p>`;
+            chat.scrollTop = chat.scrollHeight; // Auto-scrolls to bottom
+        }
+    </script>
 </body>
 </html>
