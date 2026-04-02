@@ -715,7 +715,40 @@ function loop() {
     requestAnimationFrame(loop);
 }
 loop();
+
+
+<script>
+function diagnose(goal) {
+    const chatBox = document.getElementById('chat-box');
+    let recommendation = "";
+
+    if (goal === 'performance') {
+        recommendation = "Strategy: [THE REDLINE]. Pharmaceutical-grade Citrulline Malate detected. Optimized for high-output sprints.";
+    } else if (goal === 'cognitive') {
+        recommendation = "Strategy: [ZERO LATENCY]. C8 MCT Oil and L-Theanine engaged. Eliminating neural lag.";
+    } else if (goal === 'recovery') {
+        recommendation = "Strategy: [PURPLE RAIN]. Trans-Resveratrol antioxidant sequence initiated for system restoration.";
+    }
+
+    chatBox.innerHTML += `<p class='agent-msg' style='color:var(--cyan)'>User Selected: ${goal.toUpperCase()}</p>`;
+    chatBox.innerHTML += `<p class='agent-msg'>${recommendation}</p>`;
+}
 </script>
+    <div id="link-agent">
+        <div id="agent-header">SYSTEM INTELLIGENCE: THE LINK</div>
+        <div id="chat-box">
+            <p class="agent-msg">System Initialized... <br>Welcome to the Infinity Link Hub.</p>
+            <p class="agent-msg">Please select your current optimization goal:</p>
+            <div class="diagnostic-options">
+                <button onclick="diagnose('performance')">[ PERFORMANCE ]</button>
+                <button onclick="diagnose('cognitive')">[ COGNITIVE FOCUS ]</button>
+                <button onclick="diagnose('recovery')">[ SYSTEM RECOVERY ]</button>
+            </div>
+        </div>
+    </div>
+
+    </body>
+</html>
 
 </body>
 </html>
