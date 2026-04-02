@@ -166,6 +166,34 @@
         }
 
         footer { text-align: center; padding: 40px; color: #444; font-size: 0.8rem; }
+.hero-container {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#circuitCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.glow-text {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    color: var(--cyan);
+    text-shadow: 0 0 15px var(--cyan);
+    pointer-events: none; /* Allows clicks to go through to canvas if needed */
+}
 
     </style>
 </head>
@@ -175,10 +203,10 @@
         <i class="fas fa-link"></i> 100% PROFIT TO THE FOUNDATION PROJECT
     </div>
 
-    <header>
-        <h1 class="hero-title">INFINITY LINK</h1>
-        <p style="color:var(--magenta); letter-spacing:3px;">VIRTUAL ACCESS HUB</p>
-    </header>
+<div class="hero-container">
+    <canvas id="circuitCanvas"></canvas>
+    <h1 class="glow-text">INFINITY LINK</h1>
+</div>
 <div class="mission-plaque">
     <div class="plaque-header">
         <i class="fas fa-fingerprint"></i> A MESSAGE FROM THE FOUNDER
@@ -635,6 +663,59 @@
         <p>INFINITY LINK | THE FOUNDATION PROJECT</p>
         <p>115 UNION RD, ASCOT VALE, VIC</p>
     </footer>
+<script>
+const canvas = document.getElementById('circuitCanvas');
+const ctx = canvas.getContext('2d');
+let w, h;
+
+function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = 350;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const lines = [];
+const conf = {
+    lineCount: 20,
+    colors: ['#00f2ff', '#ff00ff', '#7000ff']
+};
+
+class Line {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.speed = 1 + Math.random() * 2;
+        this.color = conf.colors[Math.floor(Math.random() * conf.colors.length)];
+        this.dir = Math.random() > 0.5 ? 'h' : 'v';
+    }
+    draw() {
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        if(this.dir === 'h') ctx.lineTo(this.x + 20, this.y);
+        else ctx.lineTo(this.x, this.y + 20);
+        ctx.stroke();
+    }
+    update() {
+        if(this.dir === 'h') this.x += this.speed;
+        else this.y += this.speed;
+        if(this.x > w || this.y > h) this.reset();
+    }
+}
+
+for(let i=0; i<conf.lineCount; i++) lines.push(new Line());
+
+function loop() {
+    ctx.fillStyle = 'rgba(0,0,0,0.1)';
+    ctx.fillRect(0,0,w,h);
+    lines.forEach(l => { l.update(); l.draw(); });
+    requestAnimationFrame(loop);
+}
+loop();
+</script>
 
 </body>
 </html>
