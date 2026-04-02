@@ -4,146 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Link | Virtual Access Hub</title>
+<style>
+    :root {
+        --cyan: #00ffff;
+        --magenta: #ff00ff;
+        --dark: #050505;
+        --glass: rgba(0, 255, 255, 0.1);
+    }
+
+    body {
+        background-color: var(--dark);
+        color: white;
+        font-family: 'Orbitron', sans-serif;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+    }
+
+    /* CENTERED FOUNDER'S FRAME */
+    .founder-frame {
+        border: 2px solid var(--magenta);
+        padding: 30px;
+        max-width: 800px;
+        margin: 40px auto;
+        background: rgba(255, 0, 255, 0.05);
+        box-shadow: 0 0 15px var(--magenta);
+        text-align: center;
+    }
+
+    /* UNIFIED IMAGE CAROUSEL (Drinks & Family) */
+    .asset-carousel {
+        display: flex;
+        overflow-x: auto;
+        gap: 20px;
+        padding: 20px 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--cyan) transparent;
+    }
+
+    .asset-item {
+        flex: 0 0 auto;
+        text-align: center;
+    }
+
+    .asset-item img {
+        height: 300px; /* STRICT UNIFIED HEIGHT */
+        width: auto;
+        border: 1px solid var(--cyan);
+        filter: drop-shadow(0 0 5px var(--cyan));
+        border-radius: 4px;
+    }
+
+    /* PROFIT COUNTER */
+    .impact-counter {
+        text-align: center;
+        font-size: 1.5rem;
+        color: var(--cyan);
+        margin: 40px 0;
+        text-shadow: 0 0 10px var(--cyan);
+    }
+
+    /* BOOKING FORM */
+    .booking-container {
+        max-width: 500px;
+        margin: 40px auto;
+        border: 1px solid var(--cyan);
+        padding: 20px;
+        background: var(--glass);
+    }
+
+    input, select, button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        background: black;
+        color: var(--cyan);
+        border: 1px solid var(--cyan);
+    }
+
+    /* FLOATING INTELLIGENCE HUB */
+    .floating-hub {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 280px;
+        background: rgba(0, 0, 0, 0.95);
+        border: 2px solid var(--cyan);
+        z-index: 10000;
+        padding: 15px;
+    }
+</style>
+
+<section class="asset-carousel">
+    <div class="asset-item"><img src="kalebmoon.png" alt="Kaleb Moon"> <p>KALEB MOON</p></div>
+    <div class="asset-item"><img src="maiagold.png" alt="Maia Gold"> <p>MAIA GOLD</p></div>
+    
+    <div class="asset-item"><img src="neon-green.jpg" alt="Drink 1"> <p>NEON GREEN</p></div>
+    <div class="asset-item"><img src="drink2.jpg" alt="Drink 2"> <p>VITALITY RED</p></div>
+    <div class="asset-item"><img src="drink3.jpg" alt="Drink 3"> <p>CYBER BLUE</p></div>
+    </section>
+
+<div class="founder-frame">
+    <h3>EXECUTIVE CHAIRMAN STATEMENT</h3>
+    <p>"Infinity Link is more than a lounge; it is a safe-haven architecture built on technical precision and human vitality. Every press of juice and every hour in the pod supports the mission of The Foundation Project."</p>
+    <p><strong>- Kelly-Ann Cassidy</strong></p>
+</div>
+
+<div class="impact-counter">
+    FOUNDATION PROJECT IMPACT: $<span id="profit-val">68,700</span>.00
+</div>
+
+<div class="booking-container">
+    <h4 style="text-align: center; color: var(--magenta);">RESERVE A POD</h4>
+    <input type="text" placeholder="ACCESS NAME">
+    <select>
+        <option>POD 01 - CYAN</option>
+        <option>POD 02 - MAGENTA</option>
+    </select>
+    <button>INITIATE RESERVATION</button>
+</div>
+
+<div class="floating-hub" id="hub">
+    <div id="ai-msg" style="font-size: 0.8rem; color: var(--cyan);">SYSTEM: ONLINE</div>
+    <button onclick="askPerformance()" style="font-size: 0.7rem;">[ CONSULT INTELLIGENCE ]</button>
+</div>
+
+<script>
+    function speak(text) {
+        const msg = new SpeechSynthesisUtterance(text);
+        msg.rate = 0.9;
+        window.speechSynthesis.speak(msg);
+    }
+
+    function askPerformance() {
+        const text = "Welcome to Infinity Link. What type of performance drink do you require?";
+        document.getElementById('ai-msg').innerText = text;
+        speak(text);
+    }
+
+    // Auto-load welcome
+    window.onload = () => {
+        setTimeout(() => {
+            speak("System Intelligence active. Welcome back, Founder.");
+        }, 1000);
+    }
+</script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --cyan: #00f2ff;
-            --magenta: #ff00ff;
-            --purple: #7000ff;
-            --bg: #000000;
-        }
-
-        body {
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Rajdhani', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
-
-        /* --- HERO & CIRCUIT SECTION --- */
-        .hero-container {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        #circuitCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.8;
-        }
-
-        .glow-title {
-            position: relative;
-            z-index: 2;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            color: var(--cyan);
-            text-shadow: 0 0 20px var(--cyan), 0 0 40px var(--cyan);
-            text-align: center;
-        }
-
-        /* --- FLOATING AI AGENT HUD --- */
-        #link-agent {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 320px;
-            background: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-            z-index: 10000;
-            font-family: 'Orbitron', sans-serif;
-            border-radius: 5px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        #agent-header {
-            background: var(--cyan);
-            color: black;
-            padding: 8px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        #chat-box {
-            padding: 15px;
-            max-height: 350px;
-            overflow-y: auto;
-            border-bottom: 1px solid #333;
-        }
-
-        .agent-msg {
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            line-height: 1.4;
-            color: #e0e0e0;
-        }
-
-        .diagnostic-options button {
-            display: block;
-            width: 100%;
-            background: transparent;
-            border: 1px solid var(--magenta);
-            color: var(--magenta);
-            padding: 10px;
-            margin-top: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: 0.3s ease;
-        }
-
-        .diagnostic-options button:hover {
-            background: var(--magenta);
-            color: white;
-            box-shadow: 0 0 15px var(--magenta);
-        }
-
-        /* Responsive Fix for Mobile */
-        @media (max-width: 600px) {
-            #link-agent {
-                width: 90%;
-                left: 5%;
-                bottom: 10px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="hero-container">
-        <canvas id="circuitCanvas"></canvas>
-        <h1 class="glow-title">INFINITY LINK</h1>
-    </div>
-
-    <div id="link-agent">
-        <div id="agent-header">SYSTEM INTELLIGENCE: THE LINK</div>
-        <div id="chat-box">
-            <p class="agent-msg">System Initialized... <br>Welcome to the Virtual Access Hub.</p>
-            <p class="agent-msg">Analyze optimization requirements:</p>
-            <div class="diagnostic-options" id="options">
-                <button onclick="diagnose('performance')">[ PERFORMANCE ]</button>
-                <button onclick="diagnose('cognitive')">[ COGNITIVE FOCUS ]</button>
-                <button onclick="diagnose('recovery')">[ SYSTEM RECOVERY ]</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
         /* --- CIRCUIT ANIMATION LOGIC --- */
         const canvas = document.getElementById('circuitCanvas');
         const ctx = canvas.getContext('2d');
