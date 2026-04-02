@@ -3,225 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Link | Virtual Access Hub</title>
-<style>
-    :root {
-        --cyan: #00ffff;
-        --magenta: #ff00ff;
-        --dark: #050505;
-        --glass: rgba(0, 255, 255, 0.1);
-    }
-
-    body {
-        background-color: var(--dark);
-        color: white;
-        font-family: 'Orbitron', sans-serif;
-        margin: 0;
-        padding: 20px;
-        line-height: 1.6;
-    }
-
-    /* CENTERED FOUNDER'S FRAME */
-    .founder-frame {
-        border: 2px solid var(--magenta);
-        padding: 30px;
-        max-width: 800px;
-        margin: 40px auto;
-        background: rgba(255, 0, 255, 0.05);
-        box-shadow: 0 0 15px var(--magenta);
-        text-align: center;
-    }
-
-    /* UNIFIED IMAGE CAROUSEL (Drinks & Family) */
-    .asset-carousel {
-        display: flex;
-        overflow-x: auto;
-        gap: 20px;
-        padding: 20px 0;
-        scrollbar-width: thin;
-        scrollbar-color: var(--cyan) transparent;
-    }
-
-    .asset-item {
-        flex: 0 0 auto;
-        text-align: center;
-    }
-
-    .asset-item img {
-        height: 300px; /* STRICT UNIFIED HEIGHT */
-        width: auto;
-        border: 1px solid var(--cyan);
-        filter: drop-shadow(0 0 5px var(--cyan));
-        border-radius: 4px;
-    }
-
-    /* PROFIT COUNTER */
-    .impact-counter {
-        text-align: center;
-        font-size: 1.5rem;
-        color: var(--cyan);
-        margin: 40px 0;
-        text-shadow: 0 0 10px var(--cyan);
-    }
-
-    /* BOOKING FORM */
-    .booking-container {
-        max-width: 500px;
-        margin: 40px auto;
-        border: 1px solid var(--cyan);
-        padding: 20px;
-        background: var(--glass);
-    }
-
-    input, select, button {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        background: black;
-        color: var(--cyan);
-        border: 1px solid var(--cyan);
-    }
-
-    /* FLOATING INTELLIGENCE HUB */
-    .floating-hub {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 280px;
-        background: rgba(0, 0, 0, 0.95);
-        border: 2px solid var(--cyan);
-        z-index: 10000;
-        padding: 15px;
-    }
-</style>
-
-<section class="asset-carousel">
-    <div class="asset-item"><img src="kalebmoon.png" alt="Kaleb Moon"> <p>KALEB MOON</p></div>
-    <div class="asset-item"><img src="maiagold.png" alt="Maia Gold"> <p>MAIA GOLD</p></div>
-    
-    <div class="asset-item"><img src="neon-green.jpg" alt="Drink 1"> <p>NEON GREEN</p></div>
-    <div class="asset-item"><img src="drink2.jpg" alt="Drink 2"> <p>VITALITY RED</p></div>
-    <div class="asset-item"><img src="drink3.jpg" alt="Drink 3"> <p>CYBER BLUE</p></div>
-    </section>
-
-<div class="founder-frame">
-    <h3>EXECUTIVE CHAIRMAN STATEMENT</h3>
-    <p>"Infinity Link is more than a lounge; it is a safe-haven architecture built on technical precision and human vitality. Every press of juice and every hour in the pod supports the mission of The Foundation Project."</p>
-    <p><strong>- Kelly-Ann Cassidy</strong></p>
-</div>
-
-<div class="impact-counter">
-    FOUNDATION PROJECT IMPACT: $<span id="profit-val">68,700</span>.00
-</div>
-
-<div class="booking-container">
-    <h4 style="text-align: center; color: var(--magenta);">RESERVE A POD</h4>
-    <input type="text" placeholder="ACCESS NAME">
-    <select>
-        <option>POD 01 - CYAN</option>
-        <option>POD 02 - MAGENTA</option>
-    </select>
-    <button>INITIATE RESERVATION</button>
-</div>
-
-<div class="floating-hub" id="hub">
-    <div id="ai-msg" style="font-size: 0.8rem; color: var(--cyan);">SYSTEM: ONLINE</div>
-    <button onclick="askPerformance()" style="font-size: 0.7rem;">[ CONSULT INTELLIGENCE ]</button>
-</div>
-
-<script>
-    function speak(text) {
-        const msg = new SpeechSynthesisUtterance(text);
-        msg.rate = 0.9;
-        window.speechSynthesis.speak(msg);
-    }
-
-    function askPerformance() {
-        const text = "Welcome to Infinity Link. What type of performance drink do you require?";
-        document.getElementById('ai-msg').innerText = text;
-        speak(text);
-    }
-
-    // Auto-load welcome
-    window.onload = () => {
-        setTimeout(() => {
-            speak("System Intelligence active. Welcome back, Founder.");
-        }, 1000);
-    }
-</script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
-        /* --- CIRCUIT ANIMATION LOGIC --- */
-        const canvas = document.getElementById('circuitCanvas');
-        const ctx = canvas.getContext('2d');
-        let w, h;
-
-        function resize() {
-            w = canvas.width = window.innerWidth;
-            h = canvas.height = 400;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        const lines = [];
-        const colors = ['#00f2ff', '#ff00ff', '#7000ff'];
-
-        class Line {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * w;
-                this.y = Math.random() * h;
-                this.speed = 0.5 + Math.random() * 1.5;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.dir = Math.random() > 0.5 ? 'h' : 'v';
-                this.length = 15 + Math.random() * 30;
-            }
-            draw() {
-                ctx.strokeStyle = this.color;
-                ctx.lineWidth = 1.5;
-                ctx.beginPath();
-                ctx.moveTo(this.x, this.y);
-                if(this.dir === 'h') ctx.lineTo(this.x + this.length, this.y);
-                else ctx.lineTo(this.x, this.y + this.length);
-                ctx.stroke();
-            }
-            update() {
-                if(this.dir === 'h') this.x += this.speed;
-                else this.y += this.speed;
-                if(this.x > w || this.y > h) this.reset();
-            }
+    <title>Infinity Link | Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cyan: #00f0ff;
+            --magenta: #ff2a6d;
+            --yellow: #fcee0a;
+            --dark: #050505;
+            --circuit: rgba(0, 240, 255, 0.05);
         }
 
-        for(let i=0; i<30; i++) lines.push(new Line());
-
-        function loop() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-            ctx.fillRect(0, 0, w, h);
-            lines.forEach(l => { l.update(); l.draw(); });
-            requestAnimationFrame(loop);
+        body {
+            background-color: var(--dark);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            margin: 0;
+            overflow-x: hidden;
         }
-        loop();
 
-        /* --- AGENT DIAGNOSTIC LOGIC --- */
-        function diagnose(goal) {
-            const chat = document.getElementById('chat-box');
-            let res = "";
-            let drink = "";
-
-            if(goal === 'performance') {
-                drink = "THE REDLINE";
-                res = "Citrulline Malate activation sequence required. Directing to IL-SIG-06.";
-            } else if(goal === 'cognitive') {
-                drink = "ZERO LATENCY";
-                res = "C8 MCT Oil & L-Theanine neural bridge suggested. Engaging IL-NN-01.";
-            } else if(goal === 'recovery') {
-                drink = "PURPLE RAIN";
-                res = "Trans-Resveratrol antioxidant flush initiated. Initializing IL-SIG-07.";
-            }
-
-            chat.innerHTML += `<p class='agent-msg' style='color:var(--cyan)'> > Goal: ${goal.toUpperCase()}</p>`;
-            chat.innerHTML += `<p class='agent-msg'>System Recommendation: <strong>${drink}</strong>. ${res}</p>`;
-            chat.scrollTop = chat.scrollHeight; // Auto-scrolls to bottom
+        /* 1. TOP ANNOUNCEMENT BANNER */
+        .impact-banner {
+            background: linear-gradient(90deg, var(--magenta), #9d00ff);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--cyan);
         }
+        .impact-banner a { color: white; text-decoration: none; font-weight: bold; }
+
+        /* 2. GLOWING HEADER WITH CIRCUIT BACKGROUND */
+        header {
+            position: relative;
+            padding: 60px 20px;
+            text-align: center;
+            background-image: 
+                radial-gradient(circle at 50% 50%, var(--circuit) 1px, transparent 1px),
+                linear-gradient(to right, var(--circuit) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--circuit) 1px, transparent 1px);
+            background-size: 40px 40px;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .glitch-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            text-transform: uppercase;
+            text-shadow: 
+                2px 2px var(--magenta),
+                -2px -2px var(--cyan),
+                0 0 20px var(--cyan);
+            letter-spacing: 10px;
+        }
+
+        /* 3. DRINK CAROUSEL (RIGHT TO LEFT) */
+        .carousel-wrap {
+            padding: 40px 0;
+            background: rgba(255, 42, 109, 0.03);
+        }
+
+        .carousel-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 20px;
+            padding: 0 20px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .carousel-container::-webkit-scrollbar { display: none; }
+
+        .drink-card {
+            flex: 0 0 280px;
+            scroll-snap-align: center;
+            border: 1px solid var(--cyan);
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 90% 100%, 0 100%);
+        }
+
+        .drink-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--magenta);
+        }
+
+        /* 4. FOUNDERS STATEMENT (TIDY BOX) */
+        .founder-section {
+            max-width: 700px;
+            margin: 60px auto;
+            border: 2px solid var(--cyan);
+            padding: 40px;
+            background: rgba(0, 240, 255, 0.02);
+            position: relative;
+        }
+        .founder-section::before {
+            content: "ID: FOUNDER_VERIFIED";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--dark);
+            padding: 0 10px;
+            color: var(--cyan);
+            font-family: 'Orbitron';
+            font-size: 0.7rem;
+        }
+
+        /* 5. BOOKING FORM & COUNTER */
+        .form-grid {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .cyber-panel {
+            border: 1px solid var(--magenta);
+            padding: 25px;
+            background: #0a0a0a;
+        }
+
+        .impact-counter {
+            font-size: 3rem;
+            color: var(--yellow);
+            font-family: 'Orbitron';
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .rotating-quotes {
+            height: 60px;
+            text-align: center;
+            font-style: italic;
+            color: var(--cyan);
+        }
+
+        /* 6. FLOATING CHATBOT (THE LINK) */
+        .ai-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 300px;
+            background: #000;
+            border: 2px solid var(--cyan);
+            box-shadow: 0 0 20px var(--cyan);
+            z-index: 9999;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .btn-cyber {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: transparent;
+            color: var(--cyan);
+            border: 1px solid var(--cyan);
+            cursor: pointer;
+            font-family: 'Orbitron';
+        }
+        .btn-cyber:hover { background: var(--cyan); color: black; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.7rem;
+            border-top: 1px solid #222;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .glitch-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="impact-banner">
+        10% OF ALL PROFIT FUNDS <a href="https://thefoundationproject.online">THE FOUNDATION PROJECT</a>
+    </div>
+
+    <header>
+        <div class="glitch-title">INFINITY LINK</div>
+        <p style="color: var(--cyan); letter-spacing: 5px;">VIRTUAL ACCESS HUB</p>
+    </header>
+
+    <div class="carousel-wrap">
+        <div class="carousel-container" id="drink-carousel">
+            </div>
+    </div>
+
+    <div class="founder-section">
+        <p style="font-style: italic; font-size: 1.2rem; line-height: 2;">
+            "Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. Every juice pressed and every pod booked directly funds The Foundation Project, supporting victims of abuse, homelessness, and disability right here in our community."
+        </p>
+        <p style="text-align: right; color: var(--magenta); font-weight: bold;">- Kelly-Ann Cassidy, Executive Chairman</p>
+    </div>
+
+    <div class="form-grid">
+        <div class="cyber-panel">
+            <h3 style="color: var(--cyan); font-family: 'Orbitron';">RESERVE A POD</h3>
+            <input type="text" class="btn-cyber" style="text-align: left;" placeholder="USER ID">
+            <select class="btn-cyber">
+                <option>POD 01 - PERFORMANCE MODE</option>
+                <option>POD 02 - SYSTEM RECOVERY</option>
+                <option>POD 03 - COGNITIVE FOCUS</option>
+            </select>
+            <button class="btn-cyber" style="border-color: var(--magenta); color: var(--magenta);">INITIATE ACCESS</button>
+        </div>
+
+        <div class="cyber-panel">
+            <h3 style="text-align: center; font-size: 0.8rem;">TOTAL IMPACT GENERATED</h3>
+            <div class="impact-counter">$<span id="counter">68,700</span>.00</div>
+            <div class="rotating-quotes" id="quote-box">"Providing emergency housing for victims of abuse."</div>
+        </div>
+    </div>
+
+    <div class="ai-float" id="ai-hub">
+        <div style="font-size: 0.7rem; color: var(--cyan); margin-bottom: 10px;">SYSTEM INTELLIGENCE: THE LINK</div>
+        <p id="ai-speech" style="font-size: 0.9rem;">Initializing... What type of performance drink do you require today?</p>
+        <button class="btn-cyber" onclick="speak('Performance sequence initiated.')">PERFORMANCE BOOSTER</button>
+        <button class="btn-cyber" onclick="speak('Elasticity and recovery sequence initiated.')">ELASTICITY / RECOVERY</button>
+    </div>
+
+    <footer>
+        &copy; 2026 INFINITY LINK | POWERED BY THE FOUNDATION PROJECT | ALL RIGHTS RESERVED
+    </footer>
+
+    <script>
+        // 1. Voice Engine
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+            document.getElementById('ai-speech').innerText = text;
+        }
+
+        // 2. Carousel Auto-Loader
+        const drinkNames = ["Neon Green", "Ruby Rush", "Cyber Blue", "Magenta Pulse", "Vitality Gold", "Obsidian", "Solar Flare", "Kaleb Moon", "Maia Gold", "Neural White", "Void", "Prism", "Static", "Zenith"];
+        const carousel = document.getElementById('drink-carousel');
+        
+        drinkNames.forEach((name, i) => {
+            const card = document.createElement('div');
+            card.className = 'drink-card';
+            card.innerHTML = `<img src="drink${i+1}.jpg" alt="${name}"><h3>${name}</h3><p style="color:var(--cyan)">STATUS: ONLINE</p>`;
+            carousel.appendChild(card);
+        });
+
+        // 3. Rotating Quotes
+        const quotes = [
+            "Providing emergency housing for local victims.",
+            "Funding NDIS advocacy and support paths.",
+            "Creating life-skills pathways for the homeless.",
+            "Providing technology access for at-risk youth."
+        ];
+        let qIndex = 0;
+        setInterval(() => {
+            qIndex = (qIndex + 1) % quotes.length;
+            document.getElementById('quote-box').innerText = `"${quotes[qIndex]}"`;
+        }, 4000);
     </script>
 </body>
 </html>
