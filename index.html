@@ -3,242 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Link - Signature Series</title>
+    <title>Infinity Link | 2026</title>
     <style>
         :root {
-            --neon-blue: #00f2ff;
             --neon-purple: #bc13fe;
-            --cyber-black: #050505;
+            --neon-blue: #00d2ff;
+            --circuit-green: #39ff14;
+            --gold-halo: #ffd700;
         }
 
         body {
             margin: 0;
-            padding: 0;
-            background-color: var(--cyber-black);
-            color: white;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
-        }
-
-        /* --- SECTION 1: ANIMATED CIRCUIT BACKGROUND --- */
-        .header-container {
-            position: relative;
-            height: 300px;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
+            height: 100vh;
             overflow: hidden;
-            border-bottom: 2px solid var(--neon-blue);
         }
 
-        .circuit-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.4;
+        .app-container {
+            width: 100vw;
+            height: 100vh;
+            border: 3px solid var(--neon-blue);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><path d="M0 20 L30 20 L50 50 L100 50" stroke="%23bc13fe" fill="none" stroke-width="0.5" opacity="0.3"/><path d="M100 10 L70 10 L50 40 L0 40" stroke="%2339ff14" fill="none" stroke-width="0.5" opacity="0.3"/></svg>');
+            overflow-y: auto;
         }
 
-        /* Moving circuit lines animation */
-        .circuit-line {
-            stroke: var(--neon-blue);
-            stroke-width: 2;
-            fill: none;
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: dash 10s linear infinite;
+        .banner {
+            background: var(--neon-purple);
+            text-align: center;
+            padding: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
         }
-
-        @keyframes dash {
-            to { stroke-dashoffset: 0; }
-        }
+        .banner a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; }
 
         h1 {
-            position: relative;
-            z-index: 2;
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 10px;
-            text-shadow: 0 0 20px var(--neon-blue);
-            margin: 0;
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
+            font-size: 1.8rem;
+            margin: 10px 0;
+            letter-spacing: 5px;
         }
 
-        /* --- SECTION 2: DRINK CAROUSEL --- */
+        /* Drink Carousel */
         .carousel-container {
-            padding: 50px 0;
             display: flex;
             overflow-x: auto;
-            gap: 30px;
-            padding-left: 50px;
+            gap: 15px;
+            padding: 10px;
             scrollbar-width: none;
         }
-
         .carousel-container::-webkit-scrollbar { display: none; }
 
         .drink-card {
-            min-width: 250px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px;
+            min-width: 150px;
+            height: 190px;
+            position: relative;
+            border: 1px solid #333;
+            border-radius: 12px;
+            background: #111;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .drink-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+
+        /* Mood Badge */
+        .mood-tag {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 210, 255, 0.8);
+            color: white;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 5px var(--neon-blue);
+        }
+
+        .price-tag {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            color: var(--gold-halo);
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-shadow: 0 0 8px var(--gold-halo);
+            background: rgba(0,0,0,0.5);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .founder-box {
+            padding: 12px;
+            font-size: 0.75rem;
             text-align: center;
-            transition: transform 0.3s;
+            background: rgba(188, 19, 254, 0.05);
+            border-top: 1px solid var(--neon-purple);
+            border-bottom: 1px solid var(--neon-purple);
+            margin: 5px 0;
         }
 
-        .drink-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--neon-blue);
-        }
-
-        .drink-card img {
-            width: 180px; /* Uniform bottle size */
-            height: 350px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(0,242,255,0.5));
-        }
-
-        .drink-card h3 { margin: 15px 0 5px; color: var(--neon-blue); }
-        .drink-card p { font-size: 0.9rem; opacity: 0.8; }
-
-        /* --- SECTION 3: CIRCLE CHATBOT --- */
-        #chat-bot {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, var(--neon-blue), var(--neon-purple));
+        .mood-btn {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
+            background: radial-gradient(circle, var(--neon-blue), var(--neon-purple));
+            margin: 15px auto;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 0 20px var(--neon-blue);
             cursor: pointer;
-            box-shadow: 0 0 30px var(--neon-blue);
-            font-weight: bold;
-            transition: all 0.3s ease;
-            z-index: 100;
             text-align: center;
-            border: 4px solid white;
+            font-weight: bold;
+            font-size: 0.75rem;
+            animation: breathe 3s infinite ease-in-out;
         }
 
-        #chat-bot:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px var(--neon-purple);
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--neon-blue); }
+            50% { transform: scale(1.08); box-shadow: 0 0 25px var(--neon-purple); }
         }
 
-        #chat-bot:active { transform: scale(0.9); }
+        .booking-section { padding: 15px; background: rgba(0,0,0,0.6); }
+        .booking-section h3 { color: var(--circuit-green); margin-top: 0; font-size: 0.9rem; text-align: center; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        select, input {
+            background: #111;
+            color: #fff;
+            border: 1px solid #444;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-        .bot-status {
-            position: absolute;
-            bottom: -30px;
-            width: 250px;
-            right: 0;
-            text-align: right;
-            font-style: italic;
-            color: var(--neon-blue);
-            font-size: 0.8rem;
+        .footer-stats {
+            margin-top: auto;
+            padding: 15px;
+            text-align: center;
+            background: #050505;
+        }
+        .timer-circle {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ff00ff;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+            box-shadow: 0 0 10px #ff00ff;
         }
     </style>
 </head>
 <body>
 
-    <div class="header-container">
-        <svg class="circuit-bg" viewBox="0 0 1000 300">
-            <path class="circuit-line" d="M0,50 L200,50 L250,100 L400,100 L450,50 L800,50 L850,100 L1000,100" />
-            <path class="circuit-line" style="animation-delay: -2s;" d="M0,250 L150,250 L200,200 L500,200 L550,250 L1000,250" />
-            <path class="circuit-line" style="animation-delay: -5s;" d="M100,0 L100,150 L150,200 L300,200" />
-            <path class="circuit-line" style="animation-delay: -7s;" d="M900,300 L900,150 L850,100 L700,100" />
-            <circle cx="250" cy="100" r="3" fill="cyan" />
-            <circle cx="500" cy="200" r="3" fill="cyan" />
-        </svg>
-        <h1>Infinity Link</h1>
+<div class="app-container">
+    <div class="banner">
+        10% of every sale supports <a href="https://thefoundationproject.online" target="_blank">The Foundation Project</a>
     </div>
 
-    <div class="carousel-container" id="carousel">
+    <h1>INFINITY LINK</h1>
+
+    <div class="carousel-container">
+        <div class="drink-card">
+            <div class="mood-tag">Nebula</div>
+            <img src="kalebmoon.png" alt="Kaleb Moon">
+            <div class="price-tag">$12.50</div>
         </div>
-
-    <div id="chat-bot" onclick="startNectarChat()">
-        WELCOME
-        <div class="bot-status" id="bot-output">Tap to find your mood...</div>
+        <div class="drink-card">
+            <div class="mood-tag">Restore</div>
+            <img src="maiagold.png" alt="Maia Gold">
+            <div class="price-tag">$10.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Metabolism</div>
+            <img src="neongreen.png" alt="Neon Green">
+            <div class="price-tag">$9.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Hydrate</div>
+            <img src="electricyuzu.png" alt="Electric Yuzu">
+            <div class="price-tag">$11.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Revitalize</div>
+            <img src="rubyrush.png" alt="Ruby Rush">
+            <div class="price-tag">$11.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Performance</div>
+            <img src="theredline.png" alt="The Redline">
+            <div class="price-tag">$10.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Longevity</div>
+            <img src="purplerain.png" alt="Purple Rain">
+            <div class="price-tag">$14.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Cognitive</div>
+            <img src="zerolatency.png" alt="Zero Latency">
+            <div class="price-tag">$12.00</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Calm</div>
+            <img src="bluemacha.png" alt="Blue Matcha">
+            <div class="price-tag">$13.00</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Regenerative</div>
+            <img src="biscoffbrain.png" alt="Biscoff Brain">
+            <div class="price-tag">$11.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">De-Stress</div>
+            <img src="saltedcaramel.png" alt="Salted Caramel">
+            <div class="price-tag">$11.50</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Dermal</div>
+            <img src="dragonfruitglow.png" alt="Dragonfruit Glow">
+            <div class="price-tag">$12.00</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Elite</div>
+            <img src="drink13.png" alt="Custom">
+            <div class="price-tag">$10.00</div>
+        </div>
+        <div class="drink-card">
+            <div class="mood-tag">Foundation</div>
+            <img src="drink14.png" alt="Special">
+            <div class="price-tag">$15.00</div>
+        </div>
     </div>
 
-    <script>
-        // Drink Database from your Specs
-        const drinks = [
-            { name: "Kaleb Moon", img: "kalebmoon.png", mood: "wellness", desc: "Electric Blue Nebula" },
-            { name: "Maia Gold", img: "maiagold.png", mood: "healing", desc: "Anti-Inflammatory Elixir" },
-            { name: "Neon Green", img: "neongreen.png", mood: "clarity", desc: "Metabolism Kick" },
-            { name: "Electric Yuzu", img: "electricyuzu.png", mood: "recovery", desc: "Electrolyte Tonic" },
-            { name: "Ruby Rush", img: "rubyrush.png", mood: "energy", desc: "Power Cycle" },
-            { name: "Purple Rain", img: "purplerain.png", mood: "restoration", desc: "Longevity Antioxidant" },
-            { name: "Zero Latency", img: "zerolatency.png", mood: "focus", desc: "Nootropic Cold Brew" },
-            { name: "Blue Matcha Bolt", img: "bluemacha.png", mood: "calm", desc: "Cognitive Calm" },
-            { name: "Biscoff Brain-Boost", img: "biscoffbrain.png", mood: "reward", desc: "Neuro-Regenerative" },
-            { name: "Salted Caramel Surge", img: "saltedcaramel.png", mood: "stress", desc: "Cortisol Crusher" }
-        ];
+    <div class="founder-box">
+        <strong>From the Founder:</strong><br>
+        Each sale supports NDIS advocacy via The Foundation Project.
+    </div>
 
-        // Populate Carousel
-        const carousel = document.getElementById('carousel');
-        drinks.forEach(drink => {
-            carousel.innerHTML += `
-                <div class="drink-card">
-                    <img src="${drink.img}" alt="${drink.name}">
-                    <h3>${drink.name}</h3>
-                    <p>${drink.desc}</p>
-                </div>
-            `;
-        });
+    <div class="mood-btn" onclick="startVoice()">
+        WELCOME<br><small>Speak Mood</small>
+    </div>
 
-        // --- CHATBOT LOGIC ---
-        const botOutput = document.getElementById('bot-output');
+    <div class="booking-section">
+        <h3>BOOK A POD</h3>
+        <div class="form-grid">
+            <input type="time" placeholder="Time">
+            <input type="number" placeholder="Hours?">
+            <select>
+                <option>Select Pod</option>
+                <script>for(let i=1;i<=14;i++) document.write(`<option>Pod ${i}</option>`);</script>
+            </select>
+            <select>
+                <option>Drink (50% OFF)</option>
+                <option>Kaleb Moon - $6.25</option>
+                <option>Maia Gold - $5.25</option>
+                <option>Neon Green - $4.75</option>
+                <option>Electric Yuzu - $5.75</option>
+                <option>Ruby Rush - $5.75</option>
+                <option>The Redline - $5.25</option>
+                <option>Purple Rain - $7.25</option>
+                <option>Zero Latency - $6.00</option>
+                <option>Blue Matcha - $6.50</option>
+                <option>Biscoff Brain - $5.75</option>
+                <option>Caramel Surge - $5.75</option>
+                <option>Dragonfruit Glow - $6.00</option>
+                <option>Custom Mix - $5.00</option>
+                <option>Founder Special - $7.50</option>
+            </select>
+        </div>
+    </div>
 
-        function speak(text) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.pitch = 1.2;
-            utterance.rate = 1;
-            window.speechSynthesis.speak(utterance);
-        }
+    <div class="footer-stats">
+        <div class="timer-circle" id="donation-total">$1,240</div>
+        <div id="quote-carousel" style="font-size: 0.7rem; color: var(--neon-blue); height: 20px;">
+            $100 donated to NDIS advocacy
+        </div>
+        <div style="font-size: 0.55rem; margin-top: 10px; color: #444;">INFINITY LINK 2026 &copy;</div>
+    </div>
+</div>
 
-        function startNectarChat() {
-            speak("What mood do you require?");
-            botOutput.innerText = "Listening for mood...";
+<script>
+    function startVoice() {
+        const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I'll recommend the best drink for you? Speak now!");
+        window.speechSynthesis.speak(msg);
+    }
 
-            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!Recognition) {
-                alert("Speech recognition not supported in this browser.");
-                return;
-            }
+    const quotes = [
+        "$100 donated to NDIS advocacy",
+        "5 families supported this week",
+        "10% of each sale goes to our cause"
+    ];
+    let qIdx = 0;
+    setInterval(() => {
+        qIdx = (qIdx + 1) % quotes.length;
+        document.getElementById('quote-carousel').innerText = quotes[qIdx];
+    }, 3500);
+</script>
 
-            const recognition = new Recognition();
-            recognition.start();
-
-            recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript.toLowerCase();
-                botOutput.innerText = `You said: "${transcript}"`;
-                recommendDrink(transcript);
-            };
-        }
-
-        function recommendDrink(input) {
-            let recommendation = "I suggest a fresh water. Try saying energy, focus, or stress.";
-            
-            if (input.includes("focus") || input.includes("study")) {
-                recommendation = "For peak performance, I recommend Zero Latency. It's a nootropic cold brew with zero crash.";
-            } else if (input.includes("energy") || input.includes("tired")) {
-                recommendation = "You need Ruby Rush. Pomegranate and Guarana to revitalize your system.";
-            } else if (input.includes("stress") || input.includes("anxious")) {
-                recommendation = "Calm your system with Salted Caramel Surge. The Ashwagandha will crush your cortisol levels.";
-            } else if (input.includes("mood") || input.includes("happy")) {
-                recommendation = "Try the Kaleb Moon. It's a wellness boost that looks like a blue nebula.";
-            } else if (input.includes("calm") || input.includes("relax")) {
-                recommendation = "The Blue Matcha Bolt is your best choice for cognitive calm.";
-            }
-
-            speak(recommendation);
-            botOutput.innerText = "Recommendation sent.";
-        }
-    </script>
 </body>
 </html>
