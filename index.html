@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Infinity Link | Dashboard</title>
+    <title>Infinity Link | Neural Dashboard</title>
     <style>
         :root {
             --neon-purple: #9400ff;
@@ -18,7 +18,7 @@
             color: #fff;
             font-family: 'Segoe UI', sans-serif;
             margin: 0;
-            padding-bottom: 100px;
+            padding-bottom: 50px;
             overflow-x: hidden;
         }
 
@@ -34,33 +34,32 @@
             text-transform: uppercase;
         }
 
-        /* 1. TITLE & FOUNDER MESSAGE */
-        .intro-section { padding: 25px; text-align: center; }
+        .intro-section { padding: 20px; text-align: center; }
         .main-title {
-            font-size: 32px;
-            letter-spacing: 8px;
+            font-size: 28px;
+            letter-spacing: 6px;
             color: var(--neon-cyan);
             text-transform: uppercase;
             text-shadow: 0 0 15px var(--neon-cyan);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .founder-box {
             border-left: 3px solid var(--neon-purple);
             background: rgba(20, 20, 20, 0.8);
-            padding: 20px;
+            padding: 15px;
             text-align: left;
             font-style: italic;
-            font-size: 14px;
-            line-height: 1.6;
+            font-size: 13px;
         }
 
-        /* 2. DRINK CAROUSEL (SWIPE) */
+        /* Swipe Carousel */
         .section-label {
             color: var(--neon-cyan);
             padding-left: 20px;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin: 30px 0 10px 0;
+            margin: 25px 0 10px 0;
+            font-size: 18px;
         }
         .swipe-container {
             display: flex;
@@ -75,28 +74,24 @@
         .drink-card {
             min-width: 80vw;
             scroll-snap-align: center;
-            background: #0f0f0f;
+            background: rgba(15, 15, 15, 0.95);
             border: 1px solid #222;
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 20px;
             text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         .mood-header { color: var(--neon-cyan); font-size: 11px; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 2px; }
-        .drink-card img { width: 100%; height: 220px; object-fit: contain; margin-bottom: 15px; }
-        .drink-name { color: var(--neon-purple); font-size: 24px; font-weight: bold; text-shadow: 0 0 10px var(--neon-purple); text-transform: uppercase; }
+        .drink-card img { width: 100%; height: 260px; object-fit: contain; margin-bottom: 15px; }
+        .drink-name { color: var(--neon-purple); font-size: 22px; font-weight: bold; text-shadow: 0 0 10px var(--neon-purple); text-transform: uppercase; }
         .drink-price { color: var(--neon-gold); font-size: 20px; font-weight: bold; text-shadow: 0 0 8px var(--neon-gold); margin-top: 5px; }
 
-        /* 3. BOOKING FORM */
-        .form-container {
-            padding: 20px;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+        /* Booking Form */
+        .form-container { padding: 20px; max-width: 400px; margin: 0 auto; }
         .pod-box {
             background: #0a0a0a;
             border: 1px solid var(--neon-purple);
             padding: 20px;
-            box-shadow: 0 0 15px rgba(148, 0, 255, 0.2);
         }
         input, select {
             width: 100%;
@@ -115,12 +110,10 @@
             border: none;
             font-weight: bold;
             text-transform: uppercase;
-            box-shadow: 0 0 10px var(--neon-purple);
         }
 
-        /* 4. COUNTDOWN TIMER / CONTRIBUTION */
-        .contribution-section { text-align: center; margin-top: 40px; }
-        .money-raised { color: var(--neon-green); font-size: 48px; font-weight: bold; text-shadow: 0 0 15px var(--neon-green); }
+        .contribution-section { text-align: center; margin-top: 30px; }
+        .money-raised { color: var(--neon-green); font-size: 44px; font-weight: bold; text-shadow: 0 0 15px var(--neon-green); }
 
         .menu-trigger {
             position: fixed;
@@ -136,6 +129,7 @@
             justify-content: center;
             font-size: 9px;
             text-align: center;
+            z-index: 100;
         }
     </style>
 </head>
@@ -155,24 +149,105 @@
 
     <div class="section-label">Neural Nectars</div>
     <div class="swipe-container">
+        
         <div class="drink-card">
             <div class="mood-header">Energy / Focus</div>
             <img src="assets/drinks/kalebmoon.png">
             <div class="drink-name">Kaleb Moon</div>
             <div class="drink-price">$12.50</div>
         </div>
+
         <div class="drink-card">
             <div class="mood-header">Heal / Restore</div>
             <img src="assets/drinks/maiagold.png">
             <div class="drink-name">Maia Gold</div>
             <div class="drink-price">$10.50</div>
         </div>
+
         <div class="drink-card">
-            <div class="mood-header">Compute / Logic</div>
+            <div class="mood-header">Neuro-Regenerative / Indulgent Focus</div>
             <img src="assets/drinks/biscoffbrain.png">
             <div class="drink-name">Biscoff Brain</div>
             <div class="drink-price">$11.50</div>
         </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Metabolism Kick / Clarity Press</div>
+            <img src="assets/drinks/neongreen.png">
+            <div class="drink-name">Neon Green</div>
+            <div class="drink-price">$9.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Hydration Recovery / Electrolyte Tonic</div>
+            <img src="assets/drinks/electricyuzu.png">
+            <div class="drink-name">Electric Yuzu</div>
+            <div class="drink-price">$11.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Power Cycle / Energize & Revitalize</div>
+            <img src="assets/drinks/rubyrush.png">
+            <div class="drink-name">Ruby Rush</div>
+            <div class="drink-price">$11.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Natural Pre-Workout / Performance Hydrator</div>
+            <img src="assets/drinks/theredline.png">
+            <div class="drink-name">The Redline</div>
+            <div class="drink-price">$10.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Anti-Aging / Longevity Antioxidant</div>
+            <img src="assets/drinks/purplerain.png">
+            <div class="drink-name">Purple Rain</div>
+            <div class="drink-price">$14.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Nootropic Cream / Cognitive Fuel</div>
+            <img src="assets/drinks/zerolatency.png">
+            <div class="drink-name">Zero Latency</div>
+            <div class="drink-price">$12.00</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Cognitive Calm / Visual Sensory</div>
+            <img src="assets/drinks/bluemacha.png">
+            <div class="drink-name">Blue Matcha Bolt</div>
+            <div class="drink-price">$13.00</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Cortisol Crusher / Adaptogenic Cream</div>
+            <img src="assets/drinks/saltedcaramel.png">
+            <div class="drink-name">Salted Caramel Surge</div>
+            <div class="drink-price">$11.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Dermal Recovery / Visual Aesthetic</div>
+            <img src="assets/drinks/dragonfruitglow.png">
+            <div class="drink-name">Dragonfruit Glow</div>
+            <div class="drink-price">$12.00</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">High-Performance Protein / Detox Fuel</div>
+            <img src="assets/drinks/cookiesncode.png">
+            <div class="drink-name">Cookies & Code</div>
+            <div class="drink-price">$11.50</div>
+        </div>
+
+        <div class="drink-card">
+            <div class="mood-header">Student Favorite / Asian-Fusion</div>
+            <img src="assets/drinks/tarotech.png">
+            <div class="drink-name">Taro Tech</div>
+            <div class="drink-price">$10.50</div>
+        </div>
+
     </div>
 
     <div class="section-label" style="text-align:center; padding:0;">Secure Pod</div>
@@ -197,20 +272,18 @@
     <div class="menu-trigger">WELCOME<br>TAP FOR MENU</div>
 
     <script>
-        // Contribution logic
         let amt = 12440;
         setInterval(() => {
             amt += Math.floor(Math.random() * 2);
             document.getElementById('counter').innerText = "$" + amt.toLocaleString();
         }, 5000);
 
-        // Background Animation
         const c = document.getElementById('bg-canvas');
         const ctx = c.getContext('2d');
         let w = c.width = window.innerWidth;
         let h = c.height = window.innerHeight;
         const veins = Array(20).fill().map(() => ({
-            x: Math.random() * w, y: h, s: Math.random() * 2 + 1, c: '#9400ff'
+            x: Math.random() * w, y: h, s: Math.random() * 2 + 0.5, c: Math.random() > 0.5 ? '#9400ff' : '#00f2ff'
         }));
         function draw() {
             ctx.fillStyle = 'rgba(5,5,5,0.1)';
