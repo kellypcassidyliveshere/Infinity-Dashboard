@@ -19,20 +19,36 @@
 
         body {
             background-color: var(--bg-black);
-            /* CIRCUIT BOARD BACKGROUND */
-            background-image: 
-                radial-gradient(var(--neon-blue) 1px, transparent 0),
-                linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px, 20px 20px, 20px 20px;
-            background-attachment: fixed;
-            
             color: white;
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-            height: 100vh;
-            overflow-y: scroll;
+            line-height: 1.4;
+        }
+
+        /* ANIMATED CIRCUIT BACKGROUND */
+        .circuit-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 2px 2px, var(--neon-blue) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .vein {
+            position: fixed;
+            background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+            width: 1px;
+            height: 100px;
+            z-index: -1;
+            animation: flow 4s linear infinite;
+        }
+
+        @keyframes flow {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
 
         /* 4. Pink Halo Border */
@@ -41,94 +57,82 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             border: 4px solid var(--neon-pink);
-            box-shadow: inset 0 0 20px var(--neon-pink), 0 0 15px var(--neon-pink);
+            box-shadow: inset 0 0 15px var(--neon-pink);
             pointer-events: none;
             z-index: 9999;
         }
 
+        /* Continuous Scroll Layout */
         section {
-            height: 100vh;
-            width: 100vw;
+            padding: 60px 20px;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            padding: 20px;
-            position: relative;
-            text-align: center;
-            /* Glass effect to separate content from circuit background */
-            background: radial-gradient(circle, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0) 100%);
+            border-bottom: 1px solid rgba(0, 242, 255, 0.1);
         }
 
         /* 5. Top Banner */
         .top-banner {
-            position: fixed;
-            top: 4px; /* Move inside the pink border */
+            position: sticky;
+            top: 4px;
             width: calc(100% - 8px);
-            left: 4px;
+            margin: 0 4px;
             background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
             color: white;
             text-align: center;
-            padding: 10px;
+            padding: 12px;
             font-weight: bold;
             z-index: 10000;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            text-transform: uppercase;
+            font-size: 0.7rem;
+            display: block;
         }
 
         h1, h2 { 
             font-family: 'Orbitron', sans-serif; 
             text-transform: uppercase; 
-            letter-spacing: 4px; 
             color: var(--neon-blue); 
             margin-bottom: 15px;
             text-shadow: 0 0 10px var(--neon-blue);
         }
 
-        /* 2. Founder Message Style */
         .founder-box {
-            background: rgba(15, 15, 15, 0.9);
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
-            padding: 25px;
-            max-width: 90%;
-            line-height: 1.5;
-            font-size: 1.1rem;
-            border-radius: 5px;
+            background: rgba(10, 10, 10, 0.85);
+            border-left: 3px solid var(--neon-purple);
+            padding: 20px;
+            max-width: 95%;
+            backdrop-filter: blur(5px);
         }
 
-        /* 3. Drink Carousel */
+        /* Drink Carousel */
         .carousel-container {
             display: flex;
             overflow-x: auto;
-            width: 95vw;
+            width: 100%;
             gap: 15px;
-            padding: 20px 10px;
+            padding: 20px 0;
             scrollbar-width: none;
         }
         .drink-card {
-            min-width: 260px;
-            background: rgba(20, 20, 20, 0.9);
+            min-width: 240px;
+            background: rgba(15, 15, 15, 0.9);
             border: 1px solid #333;
-            padding: 20px;
-            border-radius: 10px;
-            transition: transform 0.3s;
-            border-top: 3px solid var(--neon-purple);
+            padding: 15px;
+            border-radius: 8px;
+            border-bottom: 2px solid var(--neon-blue);
         }
-        .drink-mood { color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.65rem; margin-bottom: 5px; }
-        .drink-price { color: var(--gold); font-weight: bold; text-shadow: 0 0 8px var(--gold); font-size: 1.5rem; margin-top: 15px; }
-        .ingredients { font-size: 0.85rem; color: #ccc; margin: 10px 0; min-height: 40px; }
+        .drink-mood { color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.6rem; }
+        .drink-price { color: var(--gold); font-weight: bold; text-shadow: 0 0 8px var(--gold); font-size: 1.3rem; margin-top: 10px; }
 
-        /* 6. Chatbot */
+        /* Chatbot */
         #chatbot-trigger {
             position: fixed;
             right: 15px;
-            bottom: 30px; /* Moved to bottom right for better UX */
-            width: 85px;
-            height: 85px;
+            bottom: 20px;
+            width: 80px;
+            height: 80px;
             background: radial-gradient(circle, var(--neon-purple), #000);
             border-radius: 50%;
             display: flex;
@@ -136,137 +140,103 @@
             justify-content: center;
             cursor: pointer;
             border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-purple);
             z-index: 10001;
-            font-size: 0.65rem;
-            font-weight: bold;
+            font-size: 0.6rem;
             text-align: center;
-            padding: 10px;
-            animation: pulse 2s infinite;
+            line-height: 1.1;
         }
 
-        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 10px var(--neon-purple); } 50% { transform: scale(1.05); box-shadow: 0 0 25px var(--neon-blue); } 100% { transform: scale(1); box-shadow: 0 0 10px var(--neon-purple); } }
-
-        /* 7. Booking Form */
+        /* Form Styling */
         .booking-form {
             display: grid;
-            gap: 12px;
-            width: 90%;
-            max-width: 350px;
-            background: rgba(10, 10, 10, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--neon-purple);
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
         }
         input, select, button {
-            padding: 14px;
-            background: #1a1a1a;
+            padding: 15px;
+            background: #111;
             border: 1px solid #444;
             color: white;
-            border-radius: 4px;
             font-family: 'Rajdhani';
             font-size: 1rem;
         }
-        input:focus { border-color: var(--neon-blue); outline: none; }
-        button { background: var(--neon-purple); font-weight: bold; cursor: pointer; text-transform: uppercase; border: none; box-shadow: 0 0 10px var(--neon-purple); }
+        button { background: var(--neon-purple); border: none; font-weight: bold; cursor: pointer; text-shadow: 0 0 5px white; }
 
-        /* 8. Donation Ticker */
+        /* Donation Ticker */
         .donation-ticker {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--neon-green);
             font-family: 'Orbitron';
-            text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
         }
-        .impact-list { height: 60px; overflow: hidden; margin-top: 25px; }
-        .impact-item { animation: slideUp 12s infinite; height: 60px; color: var(--neon-blue); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
-
-        @keyframes slideUp {
-            0%, 25% { transform: translateY(0); }
-            30%, 55% { transform: translateY(-60px); }
-            60%, 85% { transform: translateY(-120px); }
-            90%, 100% { transform: translateY(0); }
-        }
-
-        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
 
+    <div class="circuit-bg"></div>
     <a href="https://thefoundationproject.online" class="top-banner">
         10% OF ALL SALES SUPPORT THE FOUNDATION PROJECT
     </a>
 
-    <section>
-        <h1 style="font-size: 3rem;">INFINITY LINK</h1>
-        <p style="letter-spacing: 8px; color: var(--neon-purple);">THE ECOSYSTEM</p>
-        <div style="margin-top: 80px; font-size: 0.9rem; color: var(--neon-blue); opacity: 0.7;">[ SYST_INIT: SCROLL_DOWN ]</div>
+    <section style="padding-top: 40px;">
+        <h1 style="font-size: 2.5rem;">LINK</h1>
+        <p style="letter-spacing: 5px; color: var(--neon-purple);">THE ECOSYSTEM</p>
     </section>
 
     <section>
         <h2>FOUNDER'S NOTE</h2>
         <div class="founder-box">
-            <p>"Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. Every juice pressed and every pod booked directly funds <strong>The Foundation Project</strong>, supporting victims of abuse, homelessness, and disability right here in our community."</p>
-            <p style="margin-top: 15px; color: var(--neon-blue); font-weight: bold;">- Kelly-Ann Cassidy, Executive Chairman</p>
+            <p>"Welcome to Infinity Link. We built a safe zone. Every juice and pod booking funds <strong>The Foundation Project</strong>."</p>
+            <p style="margin-top: 10px; color: var(--neon-blue); font-size: 0.9rem;">- Kelly-Ann Cassidy, Executive Chairman</p>
         </div>
     </section>
 
     <section>
         <h2>NEURAL NECTARS</h2>
-        <div class="carousel-container" id="drink-carousel">
-            </div>
-        <p style="font-size: 0.7rem; color: var(--neon-purple); margin-top: 15px; font-family: 'Orbitron';">SWIPE TO SCAN MENU</p>
+        <div class="carousel-container" id="drink-carousel"></div>
     </section>
 
     <section>
         <h2>SECURE POD</h2>
         <form class="booking-form">
-            <input type="text" placeholder="USER_IDENTITY" required>
-            <div style="display: flex; gap: 10px;">
-                <input type="time" style="flex: 1;" required>
-                <select style="flex: 1;">
-                    <option>DURATION</option>
-                    <option>1 Hour</option><option>2 Hours</option><option>4 Hours</option>
-                </select>
+            <input type="text" placeholder="IDENTITY" required>
+            <div style="display: flex; gap: 5px;">
+                <input type="time" style="flex:1">
+                <select style="flex:1"><option>HOURS</option><option>1</option><option>2</option></select>
             </div>
             <select id="pod-select"></select>
             <select>
-                <option>ADD DRINK (50% OFF)</option>
+                <option>DRINK (50% OFF)</option>
                 <option>Kaleb Moon - $6.25</option>
                 <option>Maia Gold - $5.25</option>
-                <option>The Redline - $5.25</option>
-                <option>Purple Rain - $7.25</option>
             </select>
             <button type="button">ACTIVATE SAFE ZONE</button>
         </form>
     </section>
 
     <section>
-        <h2>SOCIAL CONTRIBUTION</h2>
+        <h2>CONTRIBUTION</h2>
         <div class="donation-ticker" id="counter">$12,440</div>
-        <div class="impact-list">
-            <div class="impact-item">Emergency housing for 12 families</div>
-            <div class="impact-item">Disability advocacy for 45 youth</div>
-            <div class="impact-item">Life-skills pathways program</div>
-        </div>
     </section>
 
-    <div id="chatbot-trigger" onclick="startBot()">
-        WELCOME<br>TAP FOR MENU
-    </div>
+    <div id="chatbot-trigger" onclick="startBot()">WELCOME<br>TAP FOR MENU</div>
 
     <script>
+        // Generate Moving Veins
+        const bg = document.querySelector('.circuit-bg');
+        for (let i = 0; i < 15; i++) {
+            let v = document.createElement('div');
+            v.className = 'vein';
+            v.style.left = Math.random() * 100 + 'vw';
+            v.style.animationDelay = Math.random() * 5 + 's';
+            v.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            document.body.appendChild(v);
+        }
+
         const drinks = [
-            { name: "Kaleb Moon", mood: "SIGNATURE FIZZ", ingredients: "Blue Spirulina, Lychee, Marine Collagen", price: "12.50" },
-            { name: "Maia Gold", mood: "ANTI-INFLAMMATORY", ingredients: "Turmeric, Coconut Water, Pineapple, Black Pepper", price: "10.50" },
-            { name: "Neon Green", mood: "METABOLISM KICK", ingredients: "Apple, Celery, Jalapeño, Lime", price: "9.50" },
-            { name: "Electric Yuzu", mood: "HYDRATION RECOVERY", ingredients: "Yuzu, Ginger, Ginseng, Electrolytes", price: "11.50" },
-            { name: "Ruby Rush", mood: "POWER CYCLE", ingredients: "Pomegranate, Beetroot, Guarana, Ginseng", price: "11.50" },
-            { name: "The Redline", mood: "PRE-WORKOUT", ingredients: "Watermelon, Lime, Citrulline Malate", price: "10.50" },
-            { name: "Purple Rain", mood: "LONGEVITY", ingredients: "Acai, Resveratrol, Blackcurrant", price: "14.50" },
-            { name: "Zero Latency", mood: "COGNITIVE FUEL", ingredients: "Cold Brew, MCT Oil, L-Theanine", price: "12.00" },
-            { name: "Blue Matcha Bolt", mood: "COGNITIVE CALM", ingredients: "Blue Matcha, Spirulina, Coconut Milk", price: "13.00" },
-            { name: "Biscoff Brain-Boost", mood: "NEURO-REGENERATIVE", ingredients: "Oat Milk, Lion’s Mane, Speculoos", price: "11.50" },
-            { name: "Salted Caramel Surge", mood: "CORTISOL CRUSHER", ingredients: "Cashew Milk, Ashwagandha, Sea Salt", price: "11.50" }
+            { name: "Kaleb Moon", mood: "ENERGY", ingredients: "Spirulina, Collagen", price: "12.50" },
+            { name: "Maia Gold", mood: "RESTORE", ingredients: "Turmeric, Pineapple", price: "10.50" },
+            { name: "Ruby Rush", mood: "POWER", ingredients: "Pomegranate, Ginseng", price: "11.50" }
         ];
 
         const carousel = document.getElementById('drink-carousel');
@@ -274,8 +244,8 @@
             carousel.innerHTML += `
                 <div class="drink-card">
                     <div class="drink-mood">${d.mood}</div>
-                    <h3 style="font-family:'Orbitron'; color:white; font-size:1.1rem;">${d.name}</h3>
-                    <div class="ingredients">${d.ingredients}</div>
+                    <h3 style="color:white;">${d.name}</h3>
+                    <div style="font-size:0.8rem; color:#888;">${d.ingredients}</div>
                     <div class="drink-price">$${d.price}</div>
                 </div>
             `;
@@ -284,25 +254,14 @@
         const podSelect = document.getElementById('pod-select');
         for(let i=1; i<=14; i++) {
             let opt = document.createElement('option');
-            opt.value = i; opt.innerHTML = `POD_${i < 10 ? '0'+i : i}`;
+            opt.value = i; opt.innerHTML = `POD ${i}`;
             podSelect.appendChild(opt);
         }
 
         function startBot() {
-            const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I will recommend a drink. Speak Now! Say energy if you want to boost your day.");
+            const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I'll recommend a drink. Speak Now!");
             window.speechSynthesis.speak(msg);
-            document.getElementById('chatbot-trigger').style.background = "var(--neon-green)";
-            setTimeout(() => {
-                const response = prompt("Voice Input Simulated: Type your mood (Energy, Calm, Focus)");
-                if(response) alert("Optimizing selection for " + response + "... Recommended: Electric Yuzu.");
-                document.getElementById('chatbot-trigger').style.background = "radial-gradient(circle, var(--neon-purple), #000)";
-            }, 3000);
         }
-
-        setInterval(() => {
-            let current = parseInt(document.getElementById('counter').innerText.replace('$', '').replace(',', ''));
-            document.getElementById('counter').innerText = '$' + (current + 1).toLocaleString();
-        }, 4000);
     </script>
 </body>
 </html>
