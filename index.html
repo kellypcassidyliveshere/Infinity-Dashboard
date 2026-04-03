@@ -3,321 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infinity Link | 2026</title>
+    <title>Infinity Link | The Ecosystem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            --neon-blue: #00f2ff;
             --neon-purple: #bc13fe;
-            --neon-blue: #00d2ff;
-            --circuit-green: #39ff14;
-            --gold-halo: #ffd700;
+            --neon-pink: #ff00ff;
+            --neon-green: #39ff14;
+            --gold: #ffd700;
+            --bg-black: #050505;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            margin: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: 'Segoe UI', sans-serif;
-            display: flex;
-            justify-content: center;
+            background-color: var(--bg-black);
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            /* Enable Scroll Snapping */
+            scroll-snap-type: y mandatory;
             height: 100vh;
-            overflow: hidden;
+            overflow-y: scroll;
         }
 
-        .app-container {
-            width: 100vw;
+        /* 4. Pink Halo Border */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 4px solid var(--neon-pink);
+            box-shadow: inset 0 0 15px var(--neon-pink), 0 0 15px var(--neon-pink);
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        section {
             height: 100vh;
-            border: 3px solid var(--neon-blue);
-            box-sizing: border-box;
+            width: 100vw;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><path d="M0 20 L30 20 L50 50 L100 50" stroke="%23bc13fe" fill="none" stroke-width="0.5" opacity="0.3"/><path d="M100 10 L70 10 L50 40 L0 40" stroke="%2339ff14" fill="none" stroke-width="0.5" opacity="0.3"/></svg>');
-            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            padding: 40px;
+            position: relative;
+            text-align: center;
         }
 
-        .banner {
-            background: var(--neon-purple);
+        /* 5. Top Banner */
+        .top-banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
+            color: white;
             text-align: center;
-            padding: 5px;
-            font-size: 0.7rem;
+            padding: 8px;
             font-weight: bold;
-            text-transform: uppercase;
-        }
-        .banner a { color: #fff; text-decoration: none; border-bottom: 1px solid #fff; }
-
-        h1 {
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 0 10px var(--neon-purple), 0 0 20px var(--neon-purple);
-            font-size: 1.8rem;
-            margin: 10px 0;
-            letter-spacing: 5px;
+            z-index: 10000;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
         }
 
-        /* Drink Carousel */
+        h1, h2 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 4px; color: var(--neon-blue); margin-bottom: 20px; }
+
+        /* 2. Founder Message Style */
+        .founder-box {
+            background: rgba(20, 20, 20, 0.8);
+            border-left: 4px solid var(--neon-blue);
+            padding: 20px;
+            max-width: 600px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        /* 3. Drink Carousel */
         .carousel-container {
             display: flex;
             overflow-x: auto;
-            gap: 15px;
-            padding: 10px;
+            width: 90vw;
+            gap: 20px;
+            padding: 20px;
             scrollbar-width: none;
         }
-        .carousel-container::-webkit-scrollbar { display: none; }
-
         .drink-card {
-            min-width: 150px;
-            height: 190px;
-            position: relative;
+            min-width: 280px;
+            background: #111;
             border: 1px solid #333;
-            border-radius: 12px;
-            background: #111;
-            overflow: hidden;
-            flex-shrink: 0;
-        }
-        .drink-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-
-        /* Mood Badge */
-        .mood-tag {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            background: rgba(0, 210, 255, 0.8);
-            color: white;
-            padding: 3px 7px;
-            border-radius: 4px;
-            font-size: 0.65rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 5px var(--neon-blue);
-        }
-
-        .price-tag {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            color: var(--gold-halo);
-            font-weight: bold;
-            font-size: 0.85rem;
-            text-shadow: 0 0 8px var(--gold-halo);
-            background: rgba(0,0,0,0.5);
-            padding: 2px 5px;
-            border-radius: 4px;
-        }
-
-        .founder-box {
-            padding: 12px;
-            font-size: 0.75rem;
-            text-align: center;
-            background: rgba(188, 19, 254, 0.05);
-            border-top: 1px solid var(--neon-purple);
-            border-bottom: 1px solid var(--neon-purple);
-            margin: 5px 0;
-        }
-
-        .mood-btn {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--neon-blue), var(--neon-purple));
-            margin: 15px auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 20px var(--neon-blue);
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.75rem;
-            animation: breathe 3s infinite ease-in-out;
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px var(--neon-blue); }
-            50% { transform: scale(1.08); box-shadow: 0 0 25px var(--neon-purple); }
-        }
-
-        .booking-section { padding: 15px; background: rgba(0,0,0,0.6); }
-        .booking-section h3 { color: var(--circuit-green); margin-top: 0; font-size: 0.9rem; text-align: center; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        select, input {
-            background: #111;
-            color: #fff;
-            border: 1px solid #444;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .footer-stats {
-            margin-top: auto;
             padding: 15px;
-            text-align: center;
-            background: #050505;
+            border-radius: 15px;
         }
-        .timer-circle {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #ff00ff;
+        .drink-mood { color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.7rem; }
+        .drink-price { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px var(--gold); font-size: 1.4rem; margin-top: 10px; }
+        .ingredients { font-size: 0.8rem; color: #aaa; margin: 10px 0; }
+
+        /* 6. Chatbot */
+        #chatbot-trigger {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, var(--neon-purple), #000);
             border-radius: 50%;
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
-            margin-bottom: 8px;
-            box-shadow: 0 0 10px #ff00ff;
+            cursor: pointer;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px var(--neon-purple);
+            z-index: 10001;
+            font-size: 0.6rem;
+            text-align: center;
+            padding: 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse { 0% { box-shadow: 0 0 10px var(--neon-purple); } 50% { box-shadow: 0 0 25px var(--neon-blue); } 100% { box-shadow: 0 0 10px var(--neon-purple); } }
+
+        /* 7. Booking Form */
+        .booking-form {
+            display: grid;
+            gap: 15px;
+            width: 300px;
+        }
+        input, select, button {
+            padding: 12px;
+            background: #222;
+            border: 1px solid var(--neon-blue);
+            color: white;
+            border-radius: 5px;
+            font-family: 'Rajdhani';
+        }
+        button { background: var(--neon-purple); font-weight: bold; cursor: pointer; text-transform: uppercase; }
+
+        /* 8. Donation Carousel */
+        .donation-ticker {
+            font-size: 3rem;
+            color: var(--neon-green);
+            font-family: 'Orbitron';
+        }
+        .impact-list { height: 50px; overflow: hidden; margin-top: 20px; }
+        .impact-item { animation: slideUp 10s infinite; height: 50px; color: var(--neon-blue); }
+
+        @keyframes slideUp {
+            0%, 25% { transform: translateY(0); }
+            30%, 55% { transform: translateY(-50px); }
+            60%, 85% { transform: translateY(-100px); }
+            90%, 100% { transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <div class="banner">
-        10% of every sale supports <a href="https://thefoundationproject.online" target="_blank">The Foundation Project</a>
-    </div>
+    <a href="https://thefoundationproject.online" class="top-banner">
+        10% OF ALL SALES SUPPORT THE FOUNDATION PROJECT
+    </a>
 
-    <h1>INFINITY LINK</h1>
+    <section>
+        <h1>INFINITY LINK</h1>
+        <p>THE ECOSYSTEM</p>
+        <div style="margin-top: 50px; font-size: 0.8rem; color: var(--neon-blue);">SCROLL TO EXPLORE</div>
+    </section>
 
-    <div class="carousel-container">
-        <div class="drink-card">
-            <div class="mood-tag">Nebula</div>
-            <img src="kalebmoon.png" alt="Kaleb Moon">
-            <div class="price-tag">$12.50</div>
+    <section>
+        <h2>MISSION</h2>
+        <div class="founder-box">
+            <p>"Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. Every juice pressed and every pod booked directly funds <strong>The Foundation Project</strong>, supporting victims of abuse, homelessness, and disability right here in our community. This is a space for vitality, for focus, and for the belief that technology should serve the human spirit."</p>
+            <br>
+            <p>- Kelly-Ann Cassidy, Executive Chairman</p>
         </div>
-        <div class="drink-card">
-            <div class="mood-tag">Restore</div>
-            <img src="maiagold.png" alt="Maia Gold">
-            <div class="price-tag">$10.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Metabolism</div>
-            <img src="neongreen.png" alt="Neon Green">
-            <div class="price-tag">$9.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Hydrate</div>
-            <img src="electricyuzu.png" alt="Electric Yuzu">
-            <div class="price-tag">$11.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Revitalize</div>
-            <img src="rubyrush.png" alt="Ruby Rush">
-            <div class="price-tag">$11.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Performance</div>
-            <img src="theredline.png" alt="The Redline">
-            <div class="price-tag">$10.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Longevity</div>
-            <img src="purplerain.png" alt="Purple Rain">
-            <div class="price-tag">$14.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Cognitive</div>
-            <img src="zerolatency.png" alt="Zero Latency">
-            <div class="price-tag">$12.00</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Calm</div>
-            <img src="bluemacha.png" alt="Blue Matcha">
-            <div class="price-tag">$13.00</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Regenerative</div>
-            <img src="biscoffbrain.png" alt="Biscoff Brain">
-            <div class="price-tag">$11.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">De-Stress</div>
-            <img src="saltedcaramel.png" alt="Salted Caramel">
-            <div class="price-tag">$11.50</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Dermal</div>
-            <img src="dragonfruitglow.png" alt="Dragonfruit Glow">
-            <div class="price-tag">$12.00</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Elite</div>
-            <img src="drink13.png" alt="Custom">
-            <div class="price-tag">$10.00</div>
-        </div>
-        <div class="drink-card">
-            <div class="mood-tag">Foundation</div>
-            <img src="drink14.png" alt="Special">
-            <div class="price-tag">$15.00</div>
-        </div>
-    </div>
+    </section>
 
-    <div class="founder-box">
-        <strong>From the Founder:</strong><br>
-        Each sale supports NDIS advocacy via The Foundation Project.
-    </div>
+    <section>
+        <h2>NEURAL NECTARS</h2>
+        <div class="carousel-container" id="drink-carousel">
+            </div>
+        <p style="font-size: 0.7rem; color: var(--neon-purple); margin-top: 10px;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
+    </section>
 
-    <div class="mood-btn" onclick="startVoice()">
-        WELCOME<br><small>Speak Mood</small>
-    </div>
-
-    <div class="booking-section">
-        <h3>BOOK A POD</h3>
-        <div class="form-grid">
-            <input type="time" placeholder="Time">
-            <input type="number" placeholder="Hours?">
+    <section>
+        <h2>SECURE SAFE POD</h2>
+        <form class="booking-form">
+            <input type="text" placeholder="Name / Identity" required>
+            <input type="time" required>
             <select>
-                <option>Select Pod</option>
-                <script>for(let i=1;i<=14;i++) document.write(`<option>Pod ${i}</option>`);</script>
+                <option>Hours Needed</option>
+                <option>1 Hour</option><option>2 Hours</option><option>4 Hours</option>
             </select>
+            <select id="pod-select">
+                </select>
             <select>
-                <option>Drink (50% OFF)</option>
+                <option>ADD DRINK (50% OFF)</option>
                 <option>Kaleb Moon - $6.25</option>
                 <option>Maia Gold - $5.25</option>
-                <option>Neon Green - $4.75</option>
-                <option>Electric Yuzu - $5.75</option>
-                <option>Ruby Rush - $5.75</option>
-                <option>The Redline - $5.25</option>
                 <option>Purple Rain - $7.25</option>
-                <option>Zero Latency - $6.00</option>
-                <option>Blue Matcha - $6.50</option>
-                <option>Biscoff Brain - $5.75</option>
-                <option>Caramel Surge - $5.75</option>
-                <option>Dragonfruit Glow - $6.00</option>
-                <option>Custom Mix - $5.00</option>
-                <option>Founder Special - $7.50</option>
             </select>
+            <button type="button">ACTIVATE SAFE ZONE</button>
+        </form>
+    </section>
+
+    <section>
+        <h2>TOTAL DONATED</h2>
+        <div class="donation-ticker" id="counter">$12,440</div>
+        <div class="impact-list">
+            <div class="impact-item">Emergency housing for 12 families</div>
+            <div class="impact-item">Disability advocacy for 45 youth</div>
+            <div class="impact-item">Life-skills pathways program</div>
         </div>
+    </section>
+
+    <div id="chatbot-trigger" onclick="startBot()">
+        WELCOME<br>TAP FOR MENU
     </div>
 
-    <div class="footer-stats">
-        <div class="timer-circle" id="donation-total">$1,240</div>
-        <div id="quote-carousel" style="font-size: 0.7rem; color: var(--neon-blue); height: 20px;">
-            $100 donated to NDIS advocacy
-        </div>
-        <div style="font-size: 0.55rem; margin-top: 10px; color: #444;">INFINITY LINK 2026 &copy;</div>
-    </div>
-</div>
+    <script>
+        // 3. Drink Data Population
+        const drinks = [
+            { name: "Kaleb Moon", mood: "SIGNATURE FIZZ", ingredients: "Blue Spirulina, Lychee, Marine Collagen", price: "12.50" },
+            { name: "Maia Gold", mood: "ANTI-INFLAMMATORY", ingredients: "Turmeric, Coconut Water, Pineapple, Black Pepper", price: "10.50" },
+            { name: "Neon Green", mood: "METABOLISM KICK", ingredients: "Apple, Celery, Jalapeño, Lime", price: "9.50" },
+            { name: "Electric Yuzu", mood: "HYDRATION RECOVERY", ingredients: "Yuzu, Ginger, Ginseng, Electrolytes", price: "11.50" },
+            { name: "Ruby Rush", mood: "POWER CYCLE", ingredients: "Pomegranate, Beetroot, Guarana, Ginseng", price: "11.50" },
+            { name: "The Redline", mood: "PRE-WORKOUT", ingredients: "Watermelon, Lime, Citrulline Malate", price: "10.50" },
+            { name: "Purple Rain", mood: "LONGEVITY", ingredients: "Acai, Resveratrol, Blackcurrant", price: "14.50" },
+            { name: "Zero Latency", mood: "COGNITIVE FUEL", ingredients: "Cold Brew, MCT Oil, L-Theanine", price: "12.00" },
+            { name: "Blue Matcha Bolt", mood: "COGNITIVE CALM", ingredients: "Blue Matcha, Spirulina, Coconut Milk", price: "13.00" },
+            { name: "Biscoff Brain-Boost", mood: "NEURO-REGENERATIVE", ingredients: "Oat Milk, Lion’s Mane, Speculoos", price: "11.50" },
+            { name: "Salted Caramel Surge", mood: "CORTISOL CRUSHER", ingredients: "Cashew Milk, Ashwagandha, Sea Salt", price: "11.50" }
+        ];
 
-<script>
-    function startVoice() {
-        const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I'll recommend the best drink for you? Speak now!");
-        window.speechSynthesis.speak(msg);
-    }
+        const carousel = document.getElementById('drink-carousel');
+        drinks.forEach(d => {
+            carousel.innerHTML += `
+                <div class="drink-card">
+                    <div class="drink-mood">${d.mood}</div>
+                    <h3>${d.name}</h3>
+                    <div class="ingredients">${d.ingredients}</div>
+                    <div class="drink-price">$${d.price}</div>
+                </div>
+            `;
+        });
 
-    const quotes = [
-        "$100 donated to NDIS advocacy",
-        "5 families supported this week",
-        "10% of each sale goes to our cause"
-    ];
-    let qIdx = 0;
-    setInterval(() => {
-        qIdx = (qIdx + 1) % quotes.length;
-        document.getElementById('quote-carousel').innerText = quotes[qIdx];
-    }, 3500);
-</script>
+        // Pod Selector 1-14
+        const podSelect = document.getElementById('pod-select');
+        for(let i=1; i<=14; i++) {
+            let opt = document.createElement('option');
+            opt.value = i; opt.innerHTML = `Pod ${i < 10 ? '0'+i : i}`;
+            podSelect.appendChild(opt);
+        }
 
+        // 6. Chatbot TTS Logic
+        function startBot() {
+            const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I will recommend a drink. Speak Now! Say energy if you want to boost your day.");
+            window.speechSynthesis.speak(msg);
+            
+            // Visual feedback
+            document.getElementById('chatbot-trigger').style.background = "var(--neon-green)";
+            setTimeout(() => {
+                const response = prompt("Listening... (Type your mood e.g. Energy, Calm, Focus)");
+                if(response) alert("Analyzing neural pathways for " + response + "... I recommend Ruby Rush.");
+                document.getElementById('chatbot-trigger').style.background = "radial-gradient(circle, var(--neon-purple), #000)";
+            }, 4000);
+        }
+
+        // Donation Counter Ticker
+        setInterval(() => {
+            let current = parseInt(document.getElementById('counter').innerText.replace('$', '').replace(',', ''));
+            document.getElementById('counter').innerText = '$' + (current + 1).toLocaleString();
+        }, 5000);
+    </script>
 </body>
 </html>
