@@ -19,10 +19,17 @@
 
         body {
             background-color: var(--bg-black);
+            /* CIRCUIT BOARD BACKGROUND */
+            background-image: 
+                radial-gradient(var(--neon-blue) 1px, transparent 0),
+                linear-gradient(to right, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px, 20px 20px, 20px 20px;
+            background-attachment: fixed;
+            
             color: white;
             font-family: 'Rajdhani', sans-serif;
             overflow-x: hidden;
-            /* Enable Scroll Snapping */
             scroll-snap-type: y mandatory;
             height: 100vh;
             overflow-y: scroll;
@@ -34,7 +41,7 @@
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
             border: 4px solid var(--neon-pink);
-            box-shadow: inset 0 0 15px var(--neon-pink), 0 0 15px var(--neon-pink);
+            box-shadow: inset 0 0 20px var(--neon-pink), 0 0 15px var(--neon-pink);
             pointer-events: none;
             z-index: 9999;
         }
@@ -47,67 +54,81 @@
             align-items: center;
             justify-content: center;
             scroll-snap-align: start;
-            padding: 40px;
+            padding: 20px;
             position: relative;
             text-align: center;
+            /* Glass effect to separate content from circuit background */
+            background: radial-gradient(circle, rgba(5,5,5,0.7) 0%, rgba(5,5,5,0) 100%);
         }
 
         /* 5. Top Banner */
         .top-banner {
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 4px; /* Move inside the pink border */
+            width: calc(100% - 8px);
+            left: 4px;
             background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue));
             color: white;
             text-align: center;
-            padding: 8px;
+            padding: 10px;
             font-weight: bold;
             z-index: 10000;
             text-decoration: none;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
         }
 
-        h1, h2 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 4px; color: var(--neon-blue); margin-bottom: 20px; }
+        h1, h2 { 
+            font-family: 'Orbitron', sans-serif; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            color: var(--neon-blue); 
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
 
         /* 2. Founder Message Style */
         .founder-box {
-            background: rgba(20, 20, 20, 0.8);
-            border-left: 4px solid var(--neon-blue);
-            padding: 20px;
-            max-width: 600px;
-            line-height: 1.6;
-            font-style: italic;
+            background: rgba(15, 15, 15, 0.9);
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
+            padding: 25px;
+            max-width: 90%;
+            line-height: 1.5;
+            font-size: 1.1rem;
+            border-radius: 5px;
         }
 
         /* 3. Drink Carousel */
         .carousel-container {
             display: flex;
             overflow-x: auto;
-            width: 90vw;
-            gap: 20px;
-            padding: 20px;
+            width: 95vw;
+            gap: 15px;
+            padding: 20px 10px;
             scrollbar-width: none;
         }
         .drink-card {
-            min-width: 280px;
-            background: #111;
+            min-width: 260px;
+            background: rgba(20, 20, 20, 0.9);
             border: 1px solid #333;
-            padding: 15px;
-            border-radius: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            border-top: 3px solid var(--neon-purple);
         }
-        .drink-mood { color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.7rem; }
-        .drink-price { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px var(--gold); font-size: 1.4rem; margin-top: 10px; }
-        .ingredients { font-size: 0.8rem; color: #aaa; margin: 10px 0; }
+        .drink-mood { color: var(--neon-green); font-family: 'Orbitron'; font-size: 0.65rem; margin-bottom: 5px; }
+        .drink-price { color: var(--gold); font-weight: bold; text-shadow: 0 0 8px var(--gold); font-size: 1.5rem; margin-top: 15px; }
+        .ingredients { font-size: 0.85rem; color: #ccc; margin: 10px 0; min-height: 40px; }
 
         /* 6. Chatbot */
         #chatbot-trigger {
             position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 80px;
-            height: 80px;
+            right: 15px;
+            bottom: 30px; /* Moved to bottom right for better UX */
+            width: 85px;
+            height: 85px;
             background: radial-gradient(circle, var(--neon-purple), #000);
             border-radius: 50%;
             display: flex;
@@ -117,45 +138,56 @@
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 20px var(--neon-purple);
             z-index: 10001;
-            font-size: 0.6rem;
+            font-size: 0.65rem;
+            font-weight: bold;
             text-align: center;
-            padding: 5px;
+            padding: 10px;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse { 0% { box-shadow: 0 0 10px var(--neon-purple); } 50% { box-shadow: 0 0 25px var(--neon-blue); } 100% { box-shadow: 0 0 10px var(--neon-purple); } }
+        @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 0 10px var(--neon-purple); } 50% { transform: scale(1.05); box-shadow: 0 0 25px var(--neon-blue); } 100% { transform: scale(1); box-shadow: 0 0 10px var(--neon-purple); } }
 
         /* 7. Booking Form */
         .booking-form {
             display: grid;
-            gap: 15px;
-            width: 300px;
+            gap: 12px;
+            width: 90%;
+            max-width: 350px;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--neon-purple);
         }
         input, select, button {
-            padding: 12px;
-            background: #222;
-            border: 1px solid var(--neon-blue);
+            padding: 14px;
+            background: #1a1a1a;
+            border: 1px solid #444;
             color: white;
-            border-radius: 5px;
+            border-radius: 4px;
             font-family: 'Rajdhani';
+            font-size: 1rem;
         }
-        button { background: var(--neon-purple); font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        input:focus { border-color: var(--neon-blue); outline: none; }
+        button { background: var(--neon-purple); font-weight: bold; cursor: pointer; text-transform: uppercase; border: none; box-shadow: 0 0 10px var(--neon-purple); }
 
-        /* 8. Donation Carousel */
+        /* 8. Donation Ticker */
         .donation-ticker {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--neon-green);
             font-family: 'Orbitron';
+            text-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
         }
-        .impact-list { height: 50px; overflow: hidden; margin-top: 20px; }
-        .impact-item { animation: slideUp 10s infinite; height: 50px; color: var(--neon-blue); }
+        .impact-list { height: 60px; overflow: hidden; margin-top: 25px; }
+        .impact-item { animation: slideUp 12s infinite; height: 60px; color: var(--neon-blue); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
 
         @keyframes slideUp {
             0%, 25% { transform: translateY(0); }
-            30%, 55% { transform: translateY(-50px); }
-            60%, 85% { transform: translateY(-100px); }
+            30%, 55% { transform: translateY(-60px); }
+            60%, 85% { transform: translateY(-120px); }
             90%, 100% { transform: translateY(0); }
         }
+
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body>
@@ -165,17 +197,16 @@
     </a>
 
     <section>
-        <h1>INFINITY LINK</h1>
-        <p>THE ECOSYSTEM</p>
-        <div style="margin-top: 50px; font-size: 0.8rem; color: var(--neon-blue);">SCROLL TO EXPLORE</div>
+        <h1 style="font-size: 3rem;">INFINITY LINK</h1>
+        <p style="letter-spacing: 8px; color: var(--neon-purple);">THE ECOSYSTEM</p>
+        <div style="margin-top: 80px; font-size: 0.9rem; color: var(--neon-blue); opacity: 0.7;">[ SYST_INIT: SCROLL_DOWN ]</div>
     </section>
 
     <section>
-        <h2>MISSION</h2>
+        <h2>FOUNDER'S NOTE</h2>
         <div class="founder-box">
-            <p>"Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. Every juice pressed and every pod booked directly funds <strong>The Foundation Project</strong>, supporting victims of abuse, homelessness, and disability right here in our community. This is a space for vitality, for focus, and for the belief that technology should serve the human spirit."</p>
-            <br>
-            <p>- Kelly-Ann Cassidy, Executive Chairman</p>
+            <p>"Welcome to Infinity Link. We didn't just build a lounge; we built a safe zone. Every juice pressed and every pod booked directly funds <strong>The Foundation Project</strong>, supporting victims of abuse, homelessness, and disability right here in our community."</p>
+            <p style="margin-top: 15px; color: var(--neon-blue); font-weight: bold;">- Kelly-Ann Cassidy, Executive Chairman</p>
         </div>
     </section>
 
@@ -183,24 +214,26 @@
         <h2>NEURAL NECTARS</h2>
         <div class="carousel-container" id="drink-carousel">
             </div>
-        <p style="font-size: 0.7rem; color: var(--neon-purple); margin-top: 10px;">SWIPE RIGHT TO VIEW ALL 14 DRINKS</p>
+        <p style="font-size: 0.7rem; color: var(--neon-purple); margin-top: 15px; font-family: 'Orbitron';">SWIPE TO SCAN MENU</p>
     </section>
 
     <section>
-        <h2>SECURE SAFE POD</h2>
+        <h2>SECURE POD</h2>
         <form class="booking-form">
-            <input type="text" placeholder="Name / Identity" required>
-            <input type="time" required>
-            <select>
-                <option>Hours Needed</option>
-                <option>1 Hour</option><option>2 Hours</option><option>4 Hours</option>
-            </select>
-            <select id="pod-select">
+            <input type="text" placeholder="USER_IDENTITY" required>
+            <div style="display: flex; gap: 10px;">
+                <input type="time" style="flex: 1;" required>
+                <select style="flex: 1;">
+                    <option>DURATION</option>
+                    <option>1 Hour</option><option>2 Hours</option><option>4 Hours</option>
                 </select>
+            </div>
+            <select id="pod-select"></select>
             <select>
                 <option>ADD DRINK (50% OFF)</option>
                 <option>Kaleb Moon - $6.25</option>
                 <option>Maia Gold - $5.25</option>
+                <option>The Redline - $5.25</option>
                 <option>Purple Rain - $7.25</option>
             </select>
             <button type="button">ACTIVATE SAFE ZONE</button>
@@ -208,7 +241,7 @@
     </section>
 
     <section>
-        <h2>TOTAL DONATED</h2>
+        <h2>SOCIAL CONTRIBUTION</h2>
         <div class="donation-ticker" id="counter">$12,440</div>
         <div class="impact-list">
             <div class="impact-item">Emergency housing for 12 families</div>
@@ -222,7 +255,6 @@
     </div>
 
     <script>
-        // 3. Drink Data Population
         const drinks = [
             { name: "Kaleb Moon", mood: "SIGNATURE FIZZ", ingredients: "Blue Spirulina, Lychee, Marine Collagen", price: "12.50" },
             { name: "Maia Gold", mood: "ANTI-INFLAMMATORY", ingredients: "Turmeric, Coconut Water, Pineapple, Black Pepper", price: "10.50" },
@@ -242,40 +274,35 @@
             carousel.innerHTML += `
                 <div class="drink-card">
                     <div class="drink-mood">${d.mood}</div>
-                    <h3>${d.name}</h3>
+                    <h3 style="font-family:'Orbitron'; color:white; font-size:1.1rem;">${d.name}</h3>
                     <div class="ingredients">${d.ingredients}</div>
                     <div class="drink-price">$${d.price}</div>
                 </div>
             `;
         });
 
-        // Pod Selector 1-14
         const podSelect = document.getElementById('pod-select');
         for(let i=1; i<=14; i++) {
             let opt = document.createElement('option');
-            opt.value = i; opt.innerHTML = `Pod ${i < 10 ? '0'+i : i}`;
+            opt.value = i; opt.innerHTML = `POD_${i < 10 ? '0'+i : i}`;
             podSelect.appendChild(opt);
         }
 
-        // 6. Chatbot TTS Logic
         function startBot() {
             const msg = new SpeechSynthesisUtterance("Tell me the mood you want and I will recommend a drink. Speak Now! Say energy if you want to boost your day.");
             window.speechSynthesis.speak(msg);
-            
-            // Visual feedback
             document.getElementById('chatbot-trigger').style.background = "var(--neon-green)";
             setTimeout(() => {
-                const response = prompt("Listening... (Type your mood e.g. Energy, Calm, Focus)");
-                if(response) alert("Analyzing neural pathways for " + response + "... I recommend Ruby Rush.");
+                const response = prompt("Voice Input Simulated: Type your mood (Energy, Calm, Focus)");
+                if(response) alert("Optimizing selection for " + response + "... Recommended: Electric Yuzu.");
                 document.getElementById('chatbot-trigger').style.background = "radial-gradient(circle, var(--neon-purple), #000)";
-            }, 4000);
+            }, 3000);
         }
 
-        // Donation Counter Ticker
         setInterval(() => {
             let current = parseInt(document.getElementById('counter').innerText.replace('$', '').replace(',', ''));
             document.getElementById('counter').innerText = '$' + (current + 1).toLocaleString();
-        }, 5000);
+        }, 4000);
     </script>
 </body>
 </html>
